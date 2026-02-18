@@ -8,7 +8,7 @@ using std::cout;
 using std::setw;
 int main()
 {
-    int m=2, n=3;
+    int m=2, n=3;       //m - studentu kiekis, n - pazymiu kiekis
     struct studentas{
     string vardas, pavarde;
     int* paz;
@@ -16,7 +16,7 @@ int main()
     double med;
     };
     studentas A[m];
-    for (int i=0; i<m; i++) {
+    for (int i=0; i<m; i++) {       // irasymas
         A[i].paz = new int[n];
         cin>>A[i].vardas>>A[i].pavarde;
         for (int j=0; j<n; j++){
@@ -24,8 +24,8 @@ int main()
             A[i].rez+=A[i].paz[j];
         }
         A[i].rez/=n;
-        std::sort(A[i].paz, A[i].paz+n);
-        if (n%2==0)
+        std::sort(A[i].paz, A[i].paz+n);        // isrusioja
+        if (n%2==0)                             // jei lyginis skaicius ima viduriniu dvieju vidurki
         A[i].med=(A[i].paz[n/2-1]+A[i].paz[n/2])/2.0;
         else
         A[i].med=A[i].paz[n/2];
