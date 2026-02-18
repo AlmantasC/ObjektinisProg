@@ -2,20 +2,29 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <vector>
 using std::cin;
 using std::string;
 using std::cout;
 using std::setw;
+using std::vector;
 int main()
 {
-    int m=2, n=3;       //m - studentu kiekis, n - pazymiu kiekis
     struct studentas{
     string vardas, pavarde;
-    int* paz;
+    vector<int> paz;
     double rez=0;
     double med;
     };
-    studentas A[m];
+    vector<studentas> A;
+
+    cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - baigti darba\nJusu pasirinkimas: ";
+    string pasirinkimas;
+    while (cin>>pasirinkimas) {
+        if (pasirinkimas=="1"||pasirinkimas=="2"||pasirinkimas=="3"||pasirinkimas=="4") break;
+        else cout<<"Neteisingas pasirinkimas, bandykite dar karta: ";
+    }
+
     for (int i=0; i<m; i++) {       // irasymas
         A[i].paz = new int[n];
         cin>>A[i].vardas>>A[i].pavarde;
@@ -30,7 +39,6 @@ int main()
         else
         A[i].med=A[i].paz[n/2];
     }
-    string pasirinkimas;
     cout<<"\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m) = ";
     while(cin>>pasirinkimas) {
         if (pasirinkimas=="v"||pasirinkimas=="m") break;
