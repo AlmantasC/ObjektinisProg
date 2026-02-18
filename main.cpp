@@ -30,8 +30,19 @@ int main()
         else
         A[i].med=A[i].paz[n/2];
     }
-    cout<<std::fixed<<std::setprecision(2)<<"Vardas\t\tPavarde\t\tGalutinis (Vid.) / Galutinis (Med.)\n";
+    string pasirinkimas;
+    cout<<"\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m) = ";
+    while(cin>>pasirinkimas) {
+        if (pasirinkimas=="v"||pasirinkimas=="m") break;
+        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    }
+    cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
+    if (pasirinkimas=="v") cout<<"(Vid.)";
+    else cout<<"(Med.)";
+    cout<<"\n------------------------------------------------\n";
     for (int i=0; i<m; i++) {
-        cout<<A[i].vardas<<setw(10-A[i].vardas.length())<<'\t'<<A[i].pavarde<<setw(10-A[i].vardas.length())<<'\t'<<A[i].rez<<setw(10)<<'\t'<<A[i].med<<'\n';
+        cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
+    if (pasirinkimas=="v") cout<<setw(15)<<A[i].rez<<'\n';
+    else cout<<setw(15)<<A[i].med<<'\n';
     }
 }
