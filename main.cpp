@@ -3,13 +3,16 @@
 #include <iomanip>
 #include <algorithm>
 #include <vector>
+#include <cstdlib>
 using std::cin;
 using std::string;
 using std::cout;
 using std::setw;
 using std::vector;
+using std::rand;
 int main()
 {
+    srand(time(0));
     struct studentas{
     string vardas, pavarde;
     vector<int> paz;
@@ -18,6 +21,7 @@ int main()
     double med;
     };
     vector<studentas> A;
+    studentas temp;
     int m=0, n=0;
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - baigti darba\nJusu pasirinkimas: ";
     string pasirinkimas;
@@ -33,11 +37,25 @@ int main()
         cin>>n;
     }
     else if (pasirinkimas=="2") {
-        cout<<"Po kiek pazymiu generuoti?";
+        cout<<"Po kiek pazymiu generuoti: ";
         cin>>n;
+        studentas temp;
+        cout<<"Irasykite studento varda (arba -1 baigti): ";
+        while (cin>>temp.vardas && temp.vardas!="-1") {
+            cout<<"Irasykite studento pavarde: ";
+            cin>>temp.pavarde;
+            m++;
+            temp.paz.clear();
+            temp.rez=0;
+            for (int i=0; i<n; i++){
+                temp.paz.push_back(rand()%10+1);
+            }
+            temp.egz=rand()%10+1;
+            A.push_back(temp);
+            cout<<"Irasykite studento varda (arba -1 baigti): ";
+        }
     }
     else if (pasirinkimas=="1") {
-        studentas temp;
         cout<<"Irasykite studento varda (arba -1 baigti): ";
         while (cin>>temp.vardas && temp.vardas!="-1") {
             cout<<"Irasykite studento pavarde: ";
@@ -64,9 +82,13 @@ int main()
             cout<<"Irasykite studento varda (arba -1 baigti): ";
         }
     }
-
-
-
+    for (int i=0; i<m; i++){
+        std::sort(A[i].paz.begin(), A[i].paz.end());
+        if (A[i].paz.size()%2==0) {
+            A[i].med=(A[i].paz[A[i].paz.size()/2-1]+A[i].paz[A[i].paz.size()/2])/2.0;
+        }
+        else A[i].med=A[i].paz[A[i].paz.size()/2];
+    }
     cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
     while(cin>>pasirinkimas) {
         if (pasirinkimas=="v"||pasirinkimas=="m") break;
