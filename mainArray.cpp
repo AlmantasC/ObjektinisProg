@@ -2,29 +2,31 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
-#include <vector>
 #include <cstdlib>
 using std::cin;
 using std::string;
 using std::cout;
 using std::setw;
-using std::vector;
 using std::rand;
 
 string randomstr();
 
 int main(){
-    srand(std::time(0));
+    std::srand(std::time(0));
     struct studentas{
-    string vardas, pavarde;
-    vector<int> paz;
-    int egz;
-    double rez=0;
-    double med;
+        string vardas, pavarde;
+        int* paz;
+        int pazCount;
+        int egz;
+        double rez=0;
+        double med;
     };
-    vector<studentas> A;
+
+    studentas* A = nullptr;
     studentas temp;
+    temp.paz = nullptr;
     int m=0, n=0, x;
+
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - baigti darba\nJusu pasirinkimas: ";
     string pasirinkimas;
     while (cin>>pasirinkimas) {
@@ -37,19 +39,20 @@ int main(){
         cin>>m;
         cout<<"Po kiek nd pazymiu generuoti: ";
         cin>>n;
+        A = new studentas[m];
         for (int i=0; i<m; i++) {
-            temp.vardas=randomstr();
-            temp.pavarde=randomstr();
-            temp.paz.clear();
-            temp.rez=0;
-             for (int j=0; j<n; j++){
+            A[i].vardas=randomstr();
+            A[i].pavarde=randomstr();
+            A[i].pazCount=n;
+            A[i].paz = new int[n];
+            A[i].rez=0;
+            for (int j=0; j<n; j++){
                 x=rand()%10;
-                temp.paz.push_back(x);
-                temp.rez+=x;
+                A[i].paz[j]=x;
+                A[i].rez+=x;
             }
-            temp.rez/=n;
-            temp.egz=rand()%10;
-            A.push_back(temp);
+            A[i].rez/=n;
+            A[i].egz=rand()%10;
         }
     }
     else if (pasirinkimas=="2") {
@@ -59,17 +62,22 @@ int main(){
         while (cin>>temp.vardas && temp.vardas!="-1") {
             cout<<"Irasykite studento pavarde: ";
             cin>>temp.pavarde;
-            m++;
-            temp.paz.clear();
+            temp.pazCount=n;
+            temp.paz = new int[n];
             temp.rez=0;
             for (int i=0; i<n; i++){
                 x=rand()%10+1;
-                temp.paz.push_back(x);
+                temp.paz[i]=x;
                 temp.rez+=x;
             }
             temp.rez/=n;
             temp.egz=rand()%10+1;
-            A.push_back(temp);
+            studentas* newA = new studentas[m+1];
+            for (int i=0; i<m; i++) newA[i]=A[i];
+            delete[] A;
+            A = newA;
+            A[m]=temp;
+            m++;
             cout<<"Irasykite studento varda (arba -1 baigti): ";
         }
     }
@@ -78,16 +86,21 @@ int main(){
         while (cin>>temp.vardas && temp.vardas!="-1") {
             cout<<"Irasykite studento pavarde: ";
             cin>>temp.pavarde;
-            m++;
-            temp.paz.clear();
+            temp.pazCount=0;
             temp.rez=0;
             n=0;
+            temp.paz = nullptr;
             cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
             while (cin>>x && x!=-1) {
                 if (x>=0 && x<=10) {
+                    int* newPaz = new int[n+1];
+                    for (int i=0; i<n; i++) newPaz[i]=temp.paz[i];
+                    delete[] temp.paz;
+                    temp.paz = newPaz;
+                    temp.paz[n]=x;
                     n++;
+                    temp.pazCount++;
                     temp.rez+=x;
-                    temp.paz.push_back(x);
                     cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
                 }
                 else cout<<"Neteisinga ivestis, bandykite dar karta: ";
@@ -95,16 +108,21 @@ int main(){
             temp.rez/=n;
             cout<<"Irasykite studento egzamino pazymi: ";
             cin>>temp.egz;
-            A.push_back(temp);
+            studentas* newA = new studentas[m+1];
+            for (int i=0; i<m; i++) newA[i]=A[i];
+            delete[] A;
+            A = newA;
+            A[m]=temp;
+            m++;
             cout<<"Irasykite studento varda (arba -1 baigti): ";
         }
     }
     for (int i=0; i<m; i++){
-        std::sort(A[i].paz.begin(), A[i].paz.end());
-        if (A[i].paz.size()%2==0) {
-            A[i].med=(A[i].paz[A[i].paz.size()/2-1]+A[i].paz[A[i].paz.size()/2])/2.0;
+        std::sort(A[i].paz, A[i].paz + A[i].pazCount);
+        if (A[i].pazCount%2==0) {
+            A[i].med=(A[i].paz[A[i].pazCount/2-1]+A[i].paz[A[i].pazCount/2])/2.0;
         }
-        else A[i].med=A[i].paz[A[i].paz.size()/2];
+        else A[i].med=A[i].paz[A[i].pazCount/2];
     }
     cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
     while(cin>>pasirinkimas) {
@@ -117,9 +135,11 @@ int main(){
     cout<<"\n------------------------------------------------\n";
     for (int i=0; i<m; i++) {
         cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
-    if (pasirinkimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
-    else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+        if (pasirinkimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
+        else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
     }
+    for (int i=0; i<m; i++) delete[] A[i].paz;
+    delete[] A;
 }
 
 string randomstr(){

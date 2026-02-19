@@ -14,7 +14,7 @@ using std::rand;
 string randomstr();
 
 int main(){
-    srand(std::time(0));
+    std::srand(std::time(0));
     struct studentas{
     string vardas, pavarde;
     vector<int> paz;
