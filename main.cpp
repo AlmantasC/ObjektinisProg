@@ -10,9 +10,11 @@ using std::cout;
 using std::setw;
 using std::vector;
 using std::rand;
-int main()
-{
-    srand(time(0));
+
+string randomstr();
+
+int main(){
+    srand(std::time(0));
     struct studentas{
     string vardas, pavarde;
     vector<int> paz;
@@ -22,7 +24,7 @@ int main()
     };
     vector<studentas> A;
     studentas temp;
-    int m=0, n=0;
+    int m=0, n=0, x;
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - baigti darba\nJusu pasirinkimas: ";
     string pasirinkimas;
     while (cin>>pasirinkimas) {
@@ -31,15 +33,28 @@ int main()
     }
     if (pasirinkimas=="4") return 0;
     else if (pasirinkimas=="3") {
-        cout<<"Kiek studentu sugeneruoti?";
+        cout<<"Kiek studentu sugeneruoti: ";
         cin>>m;
-        cout<<"Po kiek pazymiu generuoti?";
+        cout<<"Po kiek pazymiu generuoti: ";
         cin>>n;
+        for (int i=0; i<m; i++) {
+            temp.vardas=randomstr();
+            temp.pavarde=randomstr();
+            temp.paz.clear();
+            temp.rez=0;
+             for (int j=0; j<n; j++){
+                x=rand()%10;
+                temp.paz.push_back(x);
+                temp.rez+=x;
+            }
+            temp.rez/=n;
+            temp.egz=rand()%10;
+            A.push_back(temp);
+        }
     }
     else if (pasirinkimas=="2") {
         cout<<"Po kiek pazymiu generuoti: ";
         cin>>n;
-        studentas temp;
         cout<<"Irasykite studento varda (arba -1 baigti): ";
         while (cin>>temp.vardas && temp.vardas!="-1") {
             cout<<"Irasykite studento pavarde: ";
@@ -48,8 +63,11 @@ int main()
             temp.paz.clear();
             temp.rez=0;
             for (int i=0; i<n; i++){
-                temp.paz.push_back(rand()%10+1);
+                x=rand()%10+1;
+                temp.paz.push_back(x);
+                temp.rez+=x;
             }
+            temp.rez/=n;
             temp.egz=rand()%10+1;
             A.push_back(temp);
             cout<<"Irasykite studento varda (arba -1 baigti): ";
@@ -64,7 +82,6 @@ int main()
             temp.paz.clear();
             temp.rez=0;
             n=0;
-            int x;
             cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
             while (cin>>x && x!=-1) {
                 if (x>=0 && x<=10) {
@@ -103,4 +120,14 @@ int main()
     if (pasirinkimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
     else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
     }
+}
+
+string randomstr(){
+    int l = rand()%10+1;
+    string name="", table="abcdefghijklmnopqrstuvwxyz";
+    for (int i=0; i<l; i++) {
+        name+=table[rand()%26];
+    }
+    name[0]=toupper(name[0]);
+    return name;
 }
