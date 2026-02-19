@@ -35,7 +35,7 @@ int main(){
     else if (pasirinkimas=="3") {
         cout<<"Kiek studentu sugeneruoti: ";
         cin>>m;
-        cout<<"Po kiek pazymiu generuoti: ";
+        cout<<"Po kiek nd pazymiu generuoti: ";
         cin>>n;
         for (int i=0; i<m; i++) {
             temp.vardas=randomstr();
@@ -53,7 +53,7 @@ int main(){
         }
     }
     else if (pasirinkimas=="2") {
-        cout<<"Po kiek pazymiu generuoti: ";
+        cout<<"Po kiek nd pazymiu generuoti: ";
         cin>>n;
         cout<<"Irasykite studento varda (arba -1 baigti): ";
         while (cin>>temp.vardas && temp.vardas!="-1") {
