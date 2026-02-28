@@ -11,22 +11,29 @@ using std::string;
 using std::cout;
 using std::setw;
 using std::vector;
-using std::rand;
+using std::sort;
 
-string randomstr();
-
-int main(){
-    std::srand(std::time(0));
-    struct studentas{
+struct studentas{
     string vardas, pavarde;
     vector<int> paz;
     int egz;
     double rez=0;
     double med;
+    double gal;
     };
+
+string randomstr();
+bool pagalVard(studentas a, studentas b);
+bool pagalPavard(studentas a, studentas b);
+bool pagalGal(studentas a, studentas b);
+
+int main(){
+    std::srand(std::time(0));
     vector<studentas> A;
     studentas temp;
     int m=0, n=0, x;
+
+    // --------- PASIRINKIMAI ---------
 
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
     string ivedimas;
@@ -34,13 +41,28 @@ int main(){
         if (ivedimas=="1"||ivedimas=="2"||ivedimas=="3"||ivedimas=="4"||ivedimas=="5") break;
         else cout<<"Neteisingas pasirinkimas, bandykite dar karta: ";
     }
+
+    if (ivedimas=="5") return 0;
+
     string failas;
     if (ivedimas=="4") {
         cout<<"Iveskite failo pavadinima: ";
         cin>>failas;
     }
 
-    if (ivedimas=="5") return 0;
+    cout<<"Pasirinkite rusiavimo buda ([v] - vardas, [p] - pavarde arba [g] - galutinis): ";
+    string rusiavimas;
+    while(cin>>rusiavimas) {
+        if (rusiavimas=="v"||rusiavimas=="p"||rusiavimas=="g") break;
+        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    }
+
+    cout<<"Pasirinkite galutinio skaiciavimo buda ([v] - vidurkis arba [m] - mediana): ";
+    string skaiciavimas;
+    while(cin>>skaiciavimas) {
+        if (skaiciavimas=="v"||skaiciavimas=="m") break;
+        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    }
 
     cout<<"Pasirinkite isvedimo buda ([f] - i faila arba [e] - i ekrana): ";
     string isvedimas;
@@ -49,12 +71,7 @@ int main(){
         else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
     }
 
-    cout<<"Pasirinkite skaiciavimo buda ([v] - vidurkis arba [m] - mediana): ";
-    string skaiciavimas;
-    while(cin>>skaiciavimas) {
-        if (skaiciavimas=="v"||skaiciavimas=="m") break;
-        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
-    }
+    // --------- IVEDIMAS ---------
 
     if (ivedimas=="3") {
         cout<<"Kiek studentu sugeneruoti: ";
@@ -152,14 +169,24 @@ int main(){
         fin.close();
     }
 
-    // Compute medians
+    // --------- SKAICIAVIMAI ---------
+
     for (int i=0; i<m; i++){
-        std::sort(A[i].paz.begin(), A[i].paz.end());
-        if (A[i].paz.size()%2==0) {
-            A[i].med=(A[i].paz[A[i].paz.size()/2-1]+A[i].paz[A[i].paz.size()/2])/2.0;
-        }
+        sort(A[i].paz.begin(), A[i].paz.end());
+        if (A[i].paz.size()%2==0) A[i].med=(A[i].paz[A[i].paz.size()/2-1]+A[i].paz[A[i].paz.size()/2])/2.0;
         else A[i].med=A[i].paz[A[i].paz.size()/2];
+
+        if (skaiciavimas=="v") A[i].gal=0.4*A[i].rez+0.6*A[i].egz;
+        else A[i].gal=0.4*A[i].med+0.6*A[i].egz;
     }
+
+    // --------- RUSIAVIMAS ---------
+
+    if (rusiavimas=="v") sort(A.begin(), A.end(), pagalVard);
+    else if (rusiavimas=="p") sort(A.begin(), A.end(), pagalPavard);
+    else if (rusiavimas=="g") sort(A.begin(), A.end(), pagalGal);
+
+    // --------- ISVEDIMAS ---------
 
     if (isvedimas=="e") {
         cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
@@ -167,9 +194,7 @@ int main(){
         else cout<<"(Med.)";
         cout<<"\n------------------------------------------------\n";
         for (int i=0; i<m; i++) {
-            cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
-            if (skaiciavimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
-            else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+            cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
         }
     }
     else if (isvedimas=="f") {
@@ -179,10 +204,9 @@ int main(){
         else fout<<"(Med.)";
         fout<<"\n------------------------------------------------\n";
         for (int i=0; i<m; i++) {
-            fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
-            if (skaiciavimas=="v") fout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
-            else fout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+            fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
         }
+        fout.close();
     }
     return 0;
 }
@@ -196,3 +220,15 @@ string randomstr(){
     name[0]=toupper(name[0]);
     return name;
 }
+
+bool pagalVard(studentas a, studentas b){
+    return a.vardas<b.vardas;
+};
+
+bool pagalPavard(studentas a, studentas b){
+    return a.pavarde<b.pavarde;
+};
+
+bool pagalGal(studentas a, studentas b){
+    return a.gal<b.gal;
+};
