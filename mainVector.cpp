@@ -6,12 +6,14 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
+#include <chrono>
 using std::cin;
 using std::string;
 using std::cout;
 using std::setw;
 using std::vector;
 using std::sort;
+namespace chr = std::chrono;
 
 struct studentas{
     string vardas, pavarde;
@@ -20,7 +22,7 @@ struct studentas{
     double rez=0;
     double med;
     double gal;
-    };
+};
 
 string randomstr();
 bool pagalVard(studentas a, studentas b);
@@ -72,6 +74,8 @@ int main(){
     }
 
     // --------- IVEDIMAS ---------
+
+    auto tStart = chr::high_resolution_clock::now();
 
     if (ivedimas=="3") {
         cout<<"Kiek studentu sugeneruoti: ";
@@ -208,6 +212,10 @@ int main(){
         }
         fout.close();
     }
+
+    auto tEnd = chr::high_resolution_clock::now();
+    cout<<"\nUztruko: "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
+
     return 0;
 }
 
