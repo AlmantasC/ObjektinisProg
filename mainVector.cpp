@@ -27,14 +27,36 @@ int main(){
     vector<studentas> A;
     studentas temp;
     int m=0, n=0, x;
+
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
-    string pasirinkimas;
-    while (cin>>pasirinkimas) {
-        if (pasirinkimas=="1"||pasirinkimas=="2"||pasirinkimas=="3"||pasirinkimas=="4"||pasirinkimas=="5") break;
+    string ivedimas;
+    while (cin>>ivedimas) {
+        if (ivedimas=="1"||ivedimas=="2"||ivedimas=="3"||ivedimas=="4"||ivedimas=="5") break;
         else cout<<"Neteisingas pasirinkimas, bandykite dar karta: ";
     }
-    if (pasirinkimas=="5") return 0;
-    else if (pasirinkimas=="3") {
+    string failas;
+    if (ivedimas=="4") {
+        cout<<"Iveskite failo pavadinima: ";
+        cin>>failas;
+    }
+
+    if (ivedimas=="5") return 0;
+
+    cout<<"Pasirinkite isvedimo buda ([f] - i faila arba [e] - i ekrana): ";
+    string isvedimas;
+    while(cin>>isvedimas) {
+        if (isvedimas=="f"||isvedimas=="e") break;
+        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    }
+
+    cout<<"Pasirinkite skaiciavimo buda ([v] - vidurkis arba [m] - mediana): ";
+    string skaiciavimas;
+    while(cin>>skaiciavimas) {
+        if (skaiciavimas=="v"||skaiciavimas=="m") break;
+        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    }
+
+    if (ivedimas=="3") {
         cout<<"Kiek studentu sugeneruoti: ";
         cin>>m;
         cout<<"Po kiek nd pazymiu generuoti: ";
@@ -54,7 +76,7 @@ int main(){
             A.push_back(temp);
         }
     }
-    else if (pasirinkimas=="2") {
+    else if (ivedimas=="2") {
         cout<<"Po kiek nd pazymiu generuoti: ";
         cin>>n;
         cout<<"Irasykite studento varda (arba -1 baigti): ";
@@ -75,7 +97,7 @@ int main(){
             cout<<"Irasykite studento varda (arba -1 baigti): ";
         }
     }
-    else if (pasirinkimas=="1") {
+    else if (ivedimas=="1") {
         cout<<"Irasykite studento varda (arba -1 baigti): ";
         while (cin>>temp.vardas && temp.vardas!="-1") {
             cout<<"Irasykite studento pavarde: ";
@@ -101,10 +123,9 @@ int main(){
             cout<<"Irasykite studento varda (arba -1 baigti): ";
         }
     }
-    else if (pasirinkimas=="4") {
-        string failas, line;
-        cout<<"Iveskite failo pavadinima: ";
-        cin>>failas;
+    else if (ivedimas=="4") {
+        string line;
+
         std::ifstream fin(failas);
         std::getline(fin, line);
 
@@ -130,6 +151,8 @@ int main(){
         }
         fin.close();
     }
+
+    // Compute medians
     for (int i=0; i<m; i++){
         std::sort(A[i].paz.begin(), A[i].paz.end());
         if (A[i].paz.size()%2==0) {
@@ -137,42 +160,28 @@ int main(){
         }
         else A[i].med=A[i].paz[A[i].paz.size()/2];
     }
-    cout<<"Pasirinkite isvedimo buda ([f] - i faila arba [e] - i ekrana): ";
-    while(cin>>pasirinkimas) {
-        if (pasirinkimas=="f"||pasirinkimas=="e") break;
-        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
-    }
-    if (pasirinkimas=="e") {
-        cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
-        while(cin>>pasirinkimas) {
-            if (pasirinkimas=="v"||pasirinkimas=="m") break;
-            else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
-        }
+
+    if (isvedimas=="e") {
         cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-        if (pasirinkimas=="v") cout<<"(Vid.)";
+        if (skaiciavimas=="v") cout<<"(Vid.)";
         else cout<<"(Med.)";
         cout<<"\n------------------------------------------------\n";
         for (int i=0; i<m; i++) {
             cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
-        if (pasirinkimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
-        else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+            if (skaiciavimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
+            else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
         }
     }
-    else if (pasirinkimas=="f") {
-        cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
-        while(cin>>pasirinkimas) {
-            if (pasirinkimas=="v"||pasirinkimas=="m") break;
-            else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
-        }
+    else if (isvedimas=="f") {
         std::ofstream fout("isvedimas.txt");
         fout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-        if (pasirinkimas=="v") fout<<"(Vid.)";
+        if (skaiciavimas=="v") fout<<"(Vid.)";
         else fout<<"(Med.)";
         fout<<"\n------------------------------------------------\n";
         for (int i=0; i<m; i++) {
             fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
-        if (pasirinkimas=="v") fout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
-        else fout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+            if (skaiciavimas=="v") fout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
+            else fout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
         }
     }
     return 0;
