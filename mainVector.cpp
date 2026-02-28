@@ -137,20 +137,45 @@ int main(){
         }
         else A[i].med=A[i].paz[A[i].paz.size()/2];
     }
-    cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
+    cout<<"Pasirinkite isvedimo buda ([f] - i faila arba [e] - i ekrana): ";
     while(cin>>pasirinkimas) {
-        if (pasirinkimas=="v"||pasirinkimas=="m") break;
+        if (pasirinkimas=="f"||pasirinkimas=="e") break;
         else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
     }
-    cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-    if (pasirinkimas=="v") cout<<"(Vid.)";
-    else cout<<"(Med.)";
-    cout<<"\n------------------------------------------------\n";
-    for (int i=0; i<m; i++) {
-        cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
-    if (pasirinkimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
-    else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+    if (pasirinkimas=="e") {
+        cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
+        while(cin>>pasirinkimas) {
+            if (pasirinkimas=="v"||pasirinkimas=="m") break;
+            else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+        }
+        cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
+        if (pasirinkimas=="v") cout<<"(Vid.)";
+        else cout<<"(Med.)";
+        cout<<"\n------------------------------------------------\n";
+        for (int i=0; i<m; i++) {
+            cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
+        if (pasirinkimas=="v") cout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
+        else cout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+        }
     }
+    else if (pasirinkimas=="f") {
+        cout<<"Pasirinkite skaiciavimo buda:\n[v] - Vidurkis\n[m] - Mediana\nJusu pasirinkimas (v arba m): ";
+        while(cin>>pasirinkimas) {
+            if (pasirinkimas=="v"||pasirinkimas=="m") break;
+            else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+        }
+        std::ofstream fout("isvedimas.txt");
+        fout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
+        if (pasirinkimas=="v") fout<<"(Vid.)";
+        else fout<<"(Med.)";
+        fout<<"\n------------------------------------------------\n";
+        for (int i=0; i<m; i++) {
+            fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde;
+        if (pasirinkimas=="v") fout<<setw(15)<<0.4*A[i].rez+0.6*A[i].egz<<'\n';
+        else fout<<setw(15)<<0.4*A[i].med+0.6*A[i].egz<<'\n';
+        }
+    }
+    return 0;
 }
 
 string randomstr(){
