@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <vector>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
 using std::cin;
 using std::string;
 using std::cout;
@@ -25,13 +27,13 @@ int main(){
     vector<studentas> A;
     studentas temp;
     int m=0, n=0, x;
-    cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - baigti darba\nJusu pasirinkimas: ";
+    cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
     string pasirinkimas;
     while (cin>>pasirinkimas) {
-        if (pasirinkimas=="1"||pasirinkimas=="2"||pasirinkimas=="3"||pasirinkimas=="4") break;
+        if (pasirinkimas=="1"||pasirinkimas=="2"||pasirinkimas=="3"||pasirinkimas=="4"||pasirinkimas=="5") break;
         else cout<<"Neteisingas pasirinkimas, bandykite dar karta: ";
     }
-    if (pasirinkimas=="4") return 0;
+    if (pasirinkimas=="5") return 0;
     else if (pasirinkimas=="3") {
         cout<<"Kiek studentu sugeneruoti: ";
         cin>>m;
@@ -98,6 +100,35 @@ int main(){
             A.push_back(temp);
             cout<<"Irasykite studento varda (arba -1 baigti): ";
         }
+    }
+    else if (pasirinkimas=="4") {
+        string failas, line;
+        cout<<"Iveskite failo pavadinima: ";
+        cin>>failas;
+        std::ifstream fin(failas);
+        std::getline(fin, line);
+
+        while (std::getline(fin, line)) {
+            m++;
+            temp.paz.clear();
+            temp.rez=0;
+            n=0;
+            std::istringstream iss(line);
+            iss>>temp.vardas>>temp.pavarde;
+
+            while (iss>>x) {
+                temp.rez+=x;
+                temp.paz.push_back(x);
+                n++;
+            }
+            temp.egz=temp.paz.back();
+            temp.paz.pop_back();
+            n--;
+            temp.rez/=n;
+
+            A.push_back(temp);
+        }
+        fin.close();
     }
     for (int i=0; i<m; i++){
         std::sort(A[i].paz.begin(), A[i].paz.end());
