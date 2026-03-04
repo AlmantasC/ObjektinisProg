@@ -1,11 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <stdexcept>
-class InputException : public std::runtime_error {
-public:
-    InputException(const std::string& msg) : std::runtime_error(msg) {}
-};
 struct studentas {
     std::string vardas, pavarde;
     std::vector<int> paz;

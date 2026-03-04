@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-
+#include <stdexcept>
 std::string randomstr(){
     int l = rand()%10+1;
     std::string name="", table="abcdefghijklmnopqrstuvwxyz";
@@ -50,13 +50,13 @@ int getInt(int min, int max) {
             if (!(std::cin >> value))  {
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
-                throw InputException("Neteisinga ivestis");
+                throw std::runtime_error("Neteisinga ivestis");
             }
             if (value < min || value > max)
-                throw InputException("Pasirinkimas turi buti tarp " + std::to_string(min) + " ir " + std::to_string(max));
+                throw std::runtime_error("Pasirinkimas turi buti tarp " + std::to_string(min) + " ir " + std::to_string(max));
             return value;
         }
-        catch (const InputException& e) {
+        catch (const std::runtime_error& e) {
             std::cout << e.what() << ", pabandykite dar karta: ";
         }
     }
@@ -70,12 +70,12 @@ std::string getFile() {
         try {
             std::ifstream fin(failas);
             if (!fin.is_open())
-                throw InputException("Failas \"" + failas + "\" nerastas");
+                throw std::runtime_error("Failas \"" + failas + "\" nerastas");
             fin.close();
             return failas;
         }
-        catch (const InputException& e) {
-            std::cout << e.what() << ", iveskite is naujo: ";
+        catch (const std::runtime_error& e) {
+            std::cout << e.what() << ", pabandykite dar karta: ";
             std::cin >> failas;
         }
     }
