@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <chrono>
+#include "mylib.h"
 using std::cin;
 using std::string;
 using std::cout;
@@ -14,19 +15,6 @@ using std::setw;
 using std::vector;
 using std::sort;
 namespace chr = std::chrono;
-
-struct studentas{
-    string vardas, pavarde;
-    vector<int> paz;
-    int egz;
-    double rez=0;
-    double gal;
-};
-
-string randomstr();
-bool pagalVard(studentas a, studentas b);
-bool pagalPavard(studentas a, studentas b);
-bool pagalGal(studentas a, studentas b);
 
 int main(){
     std::srand(std::time(0));
@@ -226,25 +214,3 @@ int main(){
 
     return 0;
 }
-
-string randomstr(){
-    int l = rand()%10+1;
-    string name="", table="abcdefghijklmnopqrstuvwxyz";
-    for (int i=0; i<l; i++) {
-        name+=table[rand()%26];
-    }
-    name[0]=toupper(name[0]);
-    return name;
-}
-
-bool pagalVard(studentas a, studentas b){
-    return a.vardas<b.vardas;
-};
-
-bool pagalPavard(studentas a, studentas b){
-    return a.pavarde<b.pavarde;
-};
-
-bool pagalGal(studentas a, studentas b){
-    return a.gal<b.gal;
-};

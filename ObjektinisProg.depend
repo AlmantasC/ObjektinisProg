@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1772650734 source:c:\users\satna\documents\github\objektinisprog\main.cpp
+	<string>
+	<iostream>
+	<iomanip>
+	<algorithm>
+	<vector>
+	<cstdlib>
+	<fstream>
+	<sstream>
+	<chrono>
+	"mylib.h"
+
+1772650733 c:\users\satna\documents\github\objektinisprog\mylib.h
+	<string>
+	<vector>
+
