@@ -20,3 +20,4 @@ bool pagalVard(studentas a, studentas b);
 bool pagalPavard(studentas a, studentas b);
 bool pagalGal(studentas a, studentas b);
 int getInt(int min, int max);
+std::string getFile();

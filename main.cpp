@@ -26,13 +26,11 @@ int main(){
 
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
     int ivedimas=getInt(1, 5);
+
     string failas;
     switch (ivedimas) {
         case 5: return 0;
-        case 4: {
-            cout<<"Iveskite failo pavadinima: ";
-            cin>>failas;
-        }
+        case 4: failas=getFile();
     }
 
     cout<<"Pasirinkite pagal ka rusiuoti ([1] - varda, [2] - pavarde, [3] - galutini): ";

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 std::string randomstr(){
     int l = rand()%10+1;
@@ -57,6 +58,25 @@ int getInt(int min, int max) {
         }
         catch (const InputException& e) {
             std::cout << e.what() << ", pabandykite dar karta: ";
+        }
+    }
+};
+
+std::string getFile() {
+    std::string failas;
+    std::cout << "Iveskite failo pavadinima: ";
+    std::cin >> failas;
+    while (true) {
+        try {
+            std::ifstream fin(failas);
+            if (!fin.is_open())
+                throw InputException("Failas \"" + failas + "\" nerastas");
+            fin.close();
+            return failas;
+        }
+        catch (const InputException& e) {
+            std::cout << e.what() << ", iveskite is naujo: ";
+            std::cin >> failas;
         }
     }
 }
