@@ -1,4 +1,5 @@
 #include "mylib.h"
+#include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -40,3 +41,22 @@ bool pagalPavard(studentas a, studentas b){
 bool pagalGal(studentas a, studentas b){
     return a.gal<b.gal;
 };
+
+int getInt(int min, int max) {
+    int value;
+    while (true) {
+        try {
+            if (!(std::cin >> value))  {
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                throw InputException("Neteisinga ivestis");
+            }
+            if (value < min || value > max)
+                throw InputException("Pasirinkimas turi buti tarp " + std::to_string(min) + " ir " + std::to_string(max));
+            return value;
+        }
+        catch (const InputException& e) {
+            std::cout << e.what() << ", pabandykite dar karta: ";
+        }
+    }
+}

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1772650734 source:c:\users\satna\documents\github\objektinisprog\main.cpp
+1772653287 source:c:\users\satna\documents\github\objektinisprog\main.cpp
 	<string>
 	<iostream>
 	<iomanip>
@@ -11,9 +11,10 @@
 	<chrono>
 	"mylib.h"
 
-1772651688 c:\users\satna\documents\github\objektinisprog\mylib.h
+1772653280 c:\users\satna\documents\github\objektinisprog\mylib.h
 	<string>
 	<vector>
+	<stdexcept>
 
 1772651671 source:c:\users\satna\documents\github\objektinisprog\mylib.cpp
 	"mylib.h"

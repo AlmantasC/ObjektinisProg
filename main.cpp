@@ -25,13 +25,7 @@ int main(){
     // --------- PASIRINKIMAI ---------
 
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
-    int ivedimas=0;
-    while ((!(cin>>ivedimas))||ivedimas>5||ivedimas<1) {
-        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
-
+    int ivedimas=getInt(1, 5);
     string failas;
     switch (ivedimas) {
         case 5: return 0;
@@ -42,28 +36,14 @@ int main(){
     }
 
     cout<<"Pasirinkite pagal ka rusiuoti ([1] - varda, [2] - pavarde, [3] - galutini): ";
-    int rusiavimas;
-    while ((!(cin>>rusiavimas))||rusiavimas<1||rusiavimas>3) {
-        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+    int rusiavimas=getInt(1, 3);
 
     cout<<"Pasirinkite galutinio skaiciavimo buda ([1] - vidurkis arba [2] - mediana): ";
-    int skaiciavimas;
-    while ((!(cin>>skaiciavimas))||skaiciavimas<1||skaiciavimas>2) {
-        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+    int skaiciavimas=getInt(1, 2);
 
     cout<<"Pasirinkite isvedimo buda ([1] - i faila arba [2] - i ekrana): ";
-    int isvedimas;
-    while ((!(cin>>isvedimas))||isvedimas<1||isvedimas>2) {
-        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+    int isvedimas=getInt(1, 2);
+
     // --------- IVEDIMAS ---------
 
     auto tStart = chr::high_resolution_clock::now();
