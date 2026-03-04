@@ -20,7 +20,6 @@ struct studentas{
     vector<int> paz;
     int egz;
     double rez=0;
-    double med;
     double gal;
 };
 
@@ -38,179 +37,188 @@ int main(){
     // --------- PASIRINKIMAI ---------
 
     cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
-    string ivedimas;
-    while (cin>>ivedimas) {
-        if (ivedimas=="1"||ivedimas=="2"||ivedimas=="3"||ivedimas=="4"||ivedimas=="5") break;
-        else cout<<"Neteisingas pasirinkimas, bandykite dar karta: ";
+    int ivedimas=0;
+    while ((!(cin>>ivedimas))||ivedimas>5||ivedimas<1) {
+        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
     }
-
-    if (ivedimas=="5") return 0;
 
     string failas;
-    if (ivedimas=="4") {
-        cout<<"Iveskite failo pavadinima: ";
-        cin>>failas;
+    switch (ivedimas) {
+        case 5: return 0;
+        case 4: {
+            cout<<"Iveskite failo pavadinima: ";
+            cin>>failas;
+        }
     }
 
-    cout<<"Pasirinkite rusiavimo buda ([v] - vardas, [p] - pavarde arba [g] - galutinis): ";
-    string rusiavimas;
-    while(cin>>rusiavimas) {
-        if (rusiavimas=="v"||rusiavimas=="p"||rusiavimas=="g") break;
-        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    cout<<"Pasirinkite pagal ka rusiuoti ([1] - varda, [2] - pavarde, [3] - galutini): ";
+    int rusiavimas;
+    while ((!(cin>>rusiavimas))||rusiavimas<1||rusiavimas>3) {
+        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
     }
 
-    cout<<"Pasirinkite galutinio skaiciavimo buda ([v] - vidurkis arba [m] - mediana): ";
-    string skaiciavimas;
-    while(cin>>skaiciavimas) {
-        if (skaiciavimas=="v"||skaiciavimas=="m") break;
-        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    cout<<"Pasirinkite galutinio skaiciavimo buda ([1] - vidurkis arba [2] - mediana): ";
+    int skaiciavimas;
+    while ((!(cin>>skaiciavimas))||skaiciavimas<1||skaiciavimas>2) {
+        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
     }
 
-    cout<<"Pasirinkite isvedimo buda ([f] - i faila arba [e] - i ekrana): ";
-    string isvedimas;
-    while(cin>>isvedimas) {
-        if (isvedimas=="f"||isvedimas=="e") break;
-        else cout<<"Neteisingas pasirinkimas, pasirinkite is naujo: ";
+    cout<<"Pasirinkite isvedimo buda ([1] - i faila arba [2] - i ekrana): ";
+    int isvedimas;
+    while ((!(cin>>isvedimas))||isvedimas<1||isvedimas>2) {
+        cout<<"Neteisingas pasirinkimas, pabandykite dar karta: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
     }
-
     // --------- IVEDIMAS ---------
 
     auto tStart = chr::high_resolution_clock::now();
 
-    if (ivedimas=="3") {
-        cout<<"Kiek studentu sugeneruoti: ";
-        cin>>m;
-        cout<<"Po kiek nd pazymiu generuoti: ";
-        cin>>n;
-        for (int i=0; i<m; i++) {
-            temp.vardas=randomstr();
-            temp.pavarde=randomstr();
-            temp.paz.clear();
-            temp.rez=0;
-             for (int j=0; j<n; j++){
-                x=rand()%10;
-                temp.paz.push_back(x);
-                temp.rez+=x;
-            }
-            temp.rez/=n;
-            temp.egz=rand()%10;
-            A.push_back(temp);
-        }
-    }
-    else if (ivedimas=="2") {
-        cout<<"Po kiek nd pazymiu generuoti: ";
-        cin>>n;
-        cout<<"Irasykite studento varda (arba -1 baigti): ";
-        while (cin>>temp.vardas && temp.vardas!="-1") {
-            cout<<"Irasykite studento pavarde: ";
-            cin>>temp.pavarde;
-            m++;
-            temp.paz.clear();
-            temp.rez=0;
-            for (int i=0; i<n; i++){
-                x=rand()%10+1;
-                temp.paz.push_back(x);
-                temp.rez+=x;
-            }
-            temp.rez/=n;
-            temp.egz=rand()%10+1;
-            A.push_back(temp);
+    switch (ivedimas) {
+        case 1: {
             cout<<"Irasykite studento varda (arba -1 baigti): ";
-        }
-    }
-    else if (ivedimas=="1") {
-        cout<<"Irasykite studento varda (arba -1 baigti): ";
-        while (cin>>temp.vardas && temp.vardas!="-1") {
-            cout<<"Irasykite studento pavarde: ";
-            cin>>temp.pavarde;
-            m++;
-            temp.paz.clear();
-            temp.rez=0;
-            n=0;
-            cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
-            while (cin>>x && x!=-1) {
-                if (x>=0 && x<=10) {
-                    n++;
-                    temp.rez+=x;
-                    temp.paz.push_back(x);
-                    cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
+            while (cin>>temp.vardas && temp.vardas!="-1") {
+                cout<<"Irasykite studento pavarde: ";
+                cin>>temp.pavarde;
+                m++;
+                temp.paz.clear();
+                cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
+                while (cin>>x && x!=-1) {
+                    if (x>=0 && x<=10) {
+                        temp.paz.push_back(x);
+                        cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
+                    }
+                    else cout<<"Neteisinga ivestis, bandykite dar karta: ";
                 }
-                else cout<<"Neteisinga ivestis, bandykite dar karta: ";
+                cout<<"Irasykite studento egzamino pazymi: ";
+                cin>>temp.egz;
+                A.push_back(temp);
+                cout<<"Irasykite studento varda (arba -1 baigti): ";
             }
-            temp.rez/=n;
-            cout<<"Irasykite studento egzamino pazymi: ";
-            cin>>temp.egz;
-            A.push_back(temp);
+            break;
+        }
+        case 2: {
+            cout<<"Po kiek nd pazymiu generuoti: ";
+            cin>>n;
             cout<<"Irasykite studento varda (arba -1 baigti): ";
-        }
-    }
-    else if (ivedimas=="4") {
-        string line;
-
-        std::ifstream fin(failas);
-        std::getline(fin, line);
-
-        while (std::getline(fin, line)) {
-            m++;
-            temp.paz.clear();
-            temp.rez=0;
-            n=0;
-            std::istringstream iss(line);
-            iss>>temp.vardas>>temp.pavarde;
-
-            while (iss>>x) {
-                temp.rez+=x;
-                temp.paz.push_back(x);
-                n++;
+            while (cin>>temp.vardas && temp.vardas!="-1") {
+                cout<<"Irasykite studento pavarde: ";
+                cin>>temp.pavarde;
+                m++;
+                temp.paz.clear();
+                for (int i=0; i<n; i++){
+                    x=rand()%10+1;
+                    temp.paz.push_back(x);
+                }
+                temp.egz=rand()%10+1;
+                A.push_back(temp);
+                cout<<"Irasykite studento varda (arba -1 baigti): ";
             }
-            temp.egz=temp.paz.back();
-            temp.paz.pop_back();
-            n--;
-            temp.rez/=n;
-
-            A.push_back(temp);
+            break;
         }
-        fin.close();
+        case 3: {
+            cout<<"Kiek studentu sugeneruoti: ";
+            cin>>m;
+            cout<<"Po kiek nd pazymiu generuoti: ";
+            cin>>n;
+            for (int i=0; i<m; i++) {
+                temp.vardas=randomstr();
+                temp.pavarde=randomstr();
+                temp.paz.clear();
+                for (int j=0; j<n; j++){
+                    x=rand()%10+1;
+                    temp.paz.push_back(x);
+                }
+                temp.egz=rand()%10+1;
+                A.push_back(temp);
+            }
+            break;
+        }
+        case 4: {
+            string line;
+            std::ifstream fin(failas);
+            std::getline(fin, line);
+            while (std::getline(fin, line)) {
+                m++;
+                temp.paz.clear();
+                std::istringstream iss(line);
+                iss>>temp.vardas>>temp.pavarde;
+                while (iss>>x) {
+                    temp.paz.push_back(x);
+                }
+                temp.egz=temp.paz.back();
+                temp.paz.pop_back();
+                A.push_back(temp);
+            }
+            fin.close();
+            break;
+        }
     }
-
     // --------- SKAICIAVIMAI ---------
 
-    for (int i=0; i<m; i++){
-        sort(A[i].paz.begin(), A[i].paz.end());
-        if (A[i].paz.size()%2==0) A[i].med=(A[i].paz[A[i].paz.size()/2-1]+A[i].paz[A[i].paz.size()/2])/2.0;
-        else A[i].med=A[i].paz[A[i].paz.size()/2];
-
-        if (skaiciavimas=="v") A[i].gal=0.4*A[i].rez+0.6*A[i].egz;
-        else A[i].gal=0.4*A[i].med+0.6*A[i].egz;
+    switch (skaiciavimas){
+        case 1: {
+            for (int i=0; i<m; i++){
+            int n=A[i].paz.size();
+            double suma=0;
+                for (int j=0; j<n; j++) suma+=A[i].paz[j];
+                A[i].rez=suma/n;
+                A[i].gal=0.4*A[i].rez+0.6*A[i].egz;
+            }
+            break;
+        }
+        case 2: {
+            for (int i=0; i<m; i++){
+                int n=A[i].paz.size();
+                sort(A[i].paz.begin(), A[i].paz.end());
+                if (n%2==0) A[i].rez=(A[i].paz[n/2-1]+A[i].paz[n/2])/2.0;
+                else A[i].rez=A[i].paz[n/2];
+                A[i].gal=0.4*A[i].rez+0.6*A[i].egz;
+            }
+            break;
+        }
     }
+
 
     // --------- RUSIAVIMAS ---------
 
-    if (rusiavimas=="v") sort(A.begin(), A.end(), pagalVard);
-    else if (rusiavimas=="p") sort(A.begin(), A.end(), pagalPavard);
-    else if (rusiavimas=="g") sort(A.begin(), A.end(), pagalGal);
+    switch (rusiavimas) {
+        case 1: sort(A.begin(), A.end(), pagalVard); break;
+        case 2: sort(A.begin(), A.end(), pagalPavard); break;
+        case 3: sort(A.begin(), A.end(), pagalGal); break;
+    }
 
     // --------- ISVEDIMAS ---------
 
-    if (isvedimas=="e") {
-        cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-        if (skaiciavimas=="v") cout<<"(Vid.)";
-        else cout<<"(Med.)";
-        cout<<"\n------------------------------------------------\n";
-        for (int i=0; i<m; i++) {
-            cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
-        }
-    }
-    else if (isvedimas=="f") {
-        std::ofstream fout("isvedimas.txt");
-        fout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-        if (skaiciavimas=="v") fout<<"(Vid.)";
-        else fout<<"(Med.)";
-        fout<<"\n------------------------------------------------\n";
-        for (int i=0; i<m; i++) {
-            fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
-        }
+    switch (isvedimas) {
+        case 1: {
+            std::ofstream fout("isvedimas.txt");
+            fout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
+            if (skaiciavimas==1) fout<<"(Vid.)";
+            else fout<<"(Med.)";
+            fout<<"\n------------------------------------------------\n";
+            for (int i=0; i<m; i++) {
+                fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
+            }
         fout.close();
+        break;
+        }
+        case 2: {
+            cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
+            if (skaiciavimas==1) cout<<"(Vid.)";
+            else cout<<"(Med.)";
+            cout<<"\n------------------------------------------------\n";
+            for (int i=0; i<m; i++) {
+                cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
+            }
+            break;
+        }
     }
 
     auto tEnd = chr::high_resolution_clock::now();
