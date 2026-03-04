@@ -9,7 +9,8 @@ struct studentas {
     double rez=0;
     double gal;
 };
-
+double vid (studentas A);
+double med (studentas A);
 std::string randomstr();
 bool pagalVard(studentas a, studentas b);
 bool pagalPavard(studentas a, studentas b);

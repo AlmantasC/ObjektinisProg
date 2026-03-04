@@ -151,26 +151,8 @@ int main(){
     // --------- SKAICIAVIMAI ---------
 
     switch (skaiciavimas){
-        case 1: {
-            for (int i=0; i<m; i++){
-            int n=A[i].paz.size();
-            double suma=0;
-                for (int j=0; j<n; j++) suma+=A[i].paz[j];
-                A[i].rez=suma/n;
-                A[i].gal=0.4*A[i].rez+0.6*A[i].egz;
-            }
-            break;
-        }
-        case 2: {
-            for (int i=0; i<m; i++){
-                int n=A[i].paz.size();
-                sort(A[i].paz.begin(), A[i].paz.end());
-                if (n%2==0) A[i].rez=(A[i].paz[n/2-1]+A[i].paz[n/2])/2.0;
-                else A[i].rez=A[i].paz[n/2];
-                A[i].gal=0.4*A[i].rez+0.6*A[i].egz;
-            }
-            break;
-        }
+        case 1: for (int i=0; i<m; i++) A[i].gal=0.4*vid(A[i])+0.6*A[i].egz; break;
+        case 2: for (int i=0; i<m; i++) A[i].gal=0.4*med(A[i])+0.6*A[i].egz; break;
     }
 
 

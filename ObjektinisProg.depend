@@ -11,7 +11,13 @@
 	<chrono>
 	"mylib.h"
 
-1772650733 c:\users\satna\documents\github\objektinisprog\mylib.h
+1772651688 c:\users\satna\documents\github\objektinisprog\mylib.h
 	<string>
 	<vector>
+
+1772651671 source:c:\users\satna\documents\github\objektinisprog\mylib.cpp
+	"mylib.h"
+	<string>
+	<vector>
+	<algorithm>
 
