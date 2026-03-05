@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <fstream>
 #include <stdexcept>
+#include <iomanip>
 std::string randomstr(){
     int l = rand()%10+1;
     std::string name="", table="abcdefghijklmnopqrstuvwxyz";
@@ -79,4 +80,13 @@ std::string getFile() {
             std::cin >> failas;
         }
     }
-}
+};
+
+void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas) {
+    out<<std::fixed<<std::setprecision(2)<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavarde"<<"Galutinis ";
+    out<<(skaiciavimas == 1 ? "(Vid.)" : "(Med.)");
+    out<<"\n------------------------------------------------\n";
+    for (const auto& s : A) {
+        out<<std::left<<std::setw(15)<<s.vardas<<std::setw(15)<<s.pavarde<<std::setw(15)<<s.gal<<'\n';
+    }
+};

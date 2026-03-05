@@ -147,24 +147,12 @@ int main(){
     switch (isvedimas) {
         case 1: {
             std::ofstream fout("isvedimas.txt");
-            fout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-            if (skaiciavimas==1) fout<<"(Vid.)";
-            else fout<<"(Med.)";
-            fout<<"\n------------------------------------------------\n";
-            for (int i=0; i<m; i++) {
-                fout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
-            }
-        fout.close();
-        break;
+            printRez(fout, A, skaiciavimas);
+            fout.close();
+            break;
         }
         case 2: {
-            cout<<std::fixed<<std::setprecision(2)<<std::left<<setw(15)<<"Vardas"<<setw(15)<<"Pavarde"<<"Galutinis ";
-            if (skaiciavimas==1) cout<<"(Vid.)";
-            else cout<<"(Med.)";
-            cout<<"\n------------------------------------------------\n";
-            for (int i=0; i<m; i++) {
-                cout<<std::left<<setw(15)<<A[i].vardas<<setw(15)<<A[i].pavarde<<setw(15)<<A[i].gal<<'\n';
-            }
+            printRez(cout, A, skaiciavimas);
             break;
         }
     }

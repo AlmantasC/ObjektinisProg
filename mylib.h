@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <fstream>
 struct studentas {
     std::string vardas, pavarde;
     std::vector<int> paz;
@@ -16,3 +17,4 @@ bool pagalPavard(studentas a, studentas b);
 bool pagalGal(studentas a, studentas b);
 int getInt(int min, int max);
 std::string getFile();
+void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas);
