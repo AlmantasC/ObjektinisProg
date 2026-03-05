@@ -8,6 +8,8 @@
 #include <sstream>
 #include <chrono>
 #include "mylib.h"
+#include <windows.h>
+
 using std::cin;
 using std::string;
 using std::cout;
@@ -17,6 +19,8 @@ using std::sort;
 namespace chr = std::chrono;
 
 int main(){
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
     std::srand(std::time(0));
     vector<studentas> A;
     studentas temp;
@@ -24,7 +28,7 @@ int main(){
 
     // --------- PASIRINKIMAI ---------
 
-    cout<<"[1] - Ivedimas ranka\n[2] - Generuoti tik pazymius\n[3] - Generuoti viska\n[4] - Skaitymas is failo\n[5] - baigti darba\nJusu pasirinkimas: ";
+    cout<<"[1] - Įvedimas ranka\n[2] - Generuoti tik pažymius\n[3] - Generuoti viską\n[4] - Skaitymas iš failo\n[5] - Baigti darbą\nJūsų pasirinkimas: ";
     int ivedimas=getInt(1, 5);
 
     string failas;
@@ -33,13 +37,13 @@ int main(){
         case 4: failas=getFile();
     }
 
-    cout<<"Pasirinkite pagal ka rusiuoti ([1] - varda, [2] - pavarde, [3] - galutini): ";
+    cout<<"Pasirinkite pagal ką rūšiuoti ([1] - vardą, [2] - pavardę, [3] - galutinį): ";
     int rusiavimas=getInt(1, 3);
 
-    cout<<"Pasirinkite galutinio skaiciavimo buda ([1] - vidurkis arba [2] - mediana): ";
+    cout<<"Pasirinkite galutinio skaičiavimo budą ([1] - vidurkis arba [2] - mediana): ";
     int skaiciavimas=getInt(1, 2);
 
-    cout<<"Pasirinkite isvedimo buda ([1] - i faila arba [2] - i ekrana): ";
+    cout<<"Pasirinkite išvedimo budą ([1] - į failą arba [2] - į ekraną): ";
     int isvedimas=getInt(1, 2);
 
     // --------- IVEDIMAS ---------
@@ -84,7 +88,7 @@ int main(){
     }
 
     auto tEnd = chr::high_resolution_clock::now();
-    cout<<"\nUztruko: "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
+    cout<<"\nUžtruko: "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
 
     return 0;
 }

@@ -51,26 +51,26 @@ int getInt(int min, int max) {
             if (!(std::cin>>value)) {
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
-                throw std::runtime_error("Neteisinga ivestis");
+                throw std::runtime_error("Neteisinga įvestis");
             }
             char leftover;
             if (std::cin.get(leftover)&&leftover!='\n') {
                 std::cin.ignore(10000, '\n');
-                throw std::runtime_error("Neteisinga ivestis");
+                throw std::runtime_error("Neteisinga įvestis");
             }
             if (value<min||value>max)
-                throw std::runtime_error("Pasirinkimas turi buti tarp "+std::to_string(min)+" ir "+std::to_string(max));
+                throw std::runtime_error("Pasirinkimas turi būti tarp "+std::to_string(min)+" ir "+std::to_string(max));
             return value;
         }
         catch (const std::runtime_error& e) {
-            std::cout<<e.what()<<", pabandykite dar karta: ";
+            std::cout<<e.what()<<", pabandykite dar kartą: ";
         }
     }
 };
 
 std::string getFile() {
     std::string failas;
-    std::cout << "Iveskite failo pavadinima: ";
+    std::cout << "Įveskite failo pavadinimą: ";
     std::cin >> failas;
     while (true) {
         try {
@@ -88,45 +88,45 @@ std::string getFile() {
 };
 
 void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas) {
-    out<<std::fixed<<std::setprecision(2)<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavarde"<<"Galutinis ";
+    out<<std::fixed<<std::setprecision(2)<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavardė"<<"\tGalutinis ";
     out<<(skaiciavimas == 1 ? "(Vid.)" : "(Med.)");
     out<<"\n------------------------------------------------\n";
     for (const auto& s : A) {
-        out<<std::left<<std::setw(15)<<s.vardas<<std::setw(15)<<s.pavarde<<std::setw(15)<<s.gal<<'\n';
+        out<<std::left<<std::setw(15)<<s.vardas<<std::setw(15)<<s.pavarde<<'\t'<<s.gal<<'\n';
     }
 };
 
 void ivestiRanka(std::vector<studentas>& A, int& m) {
     studentas temp;
     int x;
-    std::cout<<"Irasykite studento varda (arba -1 baigti): ";
+    std::cout<<"Įrašykite studento vardą (arba -1 baigti): ";
     while (std::cin>>temp.vardas && temp.vardas!="-1") {
-        std::cout<<"Irasykite studento pavarde: ";
+        std::cout<<"Įrašykite studento pavardę: ";
         std::cin>>temp.pavarde;
         m++;
         temp.paz.clear();
-        std::cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
+        std::cout<<"Įrašykite studento nd pazymį (arba -1 baigti): ";
         while (true) {
             x=getInt(-1, 10);
             if(x==-1) break;
             temp.paz.push_back(x);
             std::cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
         }
-        std::cout<<"Irasykite studento egzamino pazymi: ";
+        std::cout<<"Įrašykite studento egzamino pažymį: ";
         temp.egz=getInt(0, 10);
         A.push_back(temp);
-        std::cout<<"Irasykite studento varda (arba -1 baigti): ";
+        std::cout<<"Įrašykite studento vardą (arba -1 baigti): ";
     }
 }
 
 void generuotiPazymius(std::vector<studentas>& A, int& m) {
     studentas temp;
     int n, x;
-    std::cout<<"Po kiek nd pazymiu generuoti: ";
+    std::cout<<"Po kiek nd pažymių generuoti: ";
     std::cin>>n;
-    std::cout<<"Irasykite studento varda (arba -1 baigti): ";
+    std::cout<<"Įrašykite studento vardą (arba -1 baigti): ";
     while (std::cin>>temp.vardas && temp.vardas!="-1") {
-        std::cout<<"Irasykite studento pavarde: ";
+        std::cout<<"Įrašykite studento pavardę: ";
         std::cin>>temp.pavarde;
         m++;
         temp.paz.clear();
@@ -136,16 +136,16 @@ void generuotiPazymius(std::vector<studentas>& A, int& m) {
         }
         temp.egz=rand()%10+1;
         A.push_back(temp);
-        std::cout<<"Irasykite studento varda (arba -1 baigti): ";
+        std::cout<<"Įrašykite studento vardą (arba -1 baigti): ";
     }
 }
 
 void generuotiViska(std::vector<studentas>& A, int& m) {
     studentas temp;
     int n, x;
-    std::cout<<"Kiek studentu sugeneruoti: ";
+    std::cout<<"Kiek studentų sugeneruoti: ";
     std::cin>>m;
-    std::cout<<"Po kiek nd pazymiu generuoti: ";
+    std::cout<<"Po kiek nd pažymių generuoti: ";
     std::cin>>n;
     for (int i=0; i<m; i++) {
         temp.vardas=randomstr();
