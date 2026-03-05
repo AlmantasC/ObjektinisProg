@@ -47,84 +47,10 @@ int main(){
     auto tStart = chr::high_resolution_clock::now();
 
     switch (ivedimas) {
-        case 1: {
-            cout<<"Irasykite studento varda (arba -1 baigti): ";
-            while (cin>>temp.vardas && temp.vardas!="-1") {
-                cout<<"Irasykite studento pavarde: ";
-                cin>>temp.pavarde;
-                m++;
-                temp.paz.clear();
-                cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
-                while (cin>>x && x!=-1) {
-                    if (x>=0 && x<=10) {
-                        temp.paz.push_back(x);
-                        cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
-                    }
-                    else cout<<"Neteisinga ivestis, bandykite dar karta: ";
-                }
-                cout<<"Irasykite studento egzamino pazymi: ";
-                cin>>temp.egz;
-                A.push_back(temp);
-                cout<<"Irasykite studento varda (arba -1 baigti): ";
-            }
-            break;
-        }
-        case 2: {
-            cout<<"Po kiek nd pazymiu generuoti: ";
-            cin>>n;
-            cout<<"Irasykite studento varda (arba -1 baigti): ";
-            while (cin>>temp.vardas && temp.vardas!="-1") {
-                cout<<"Irasykite studento pavarde: ";
-                cin>>temp.pavarde;
-                m++;
-                temp.paz.clear();
-                for (int i=0; i<n; i++){
-                    x=rand()%10+1;
-                    temp.paz.push_back(x);
-                }
-                temp.egz=rand()%10+1;
-                A.push_back(temp);
-                cout<<"Irasykite studento varda (arba -1 baigti): ";
-            }
-            break;
-        }
-        case 3: {
-            cout<<"Kiek studentu sugeneruoti: ";
-            cin>>m;
-            cout<<"Po kiek nd pazymiu generuoti: ";
-            cin>>n;
-            for (int i=0; i<m; i++) {
-                temp.vardas=randomstr();
-                temp.pavarde=randomstr();
-                temp.paz.clear();
-                for (int j=0; j<n; j++){
-                    x=rand()%10+1;
-                    temp.paz.push_back(x);
-                }
-                temp.egz=rand()%10+1;
-                A.push_back(temp);
-            }
-            break;
-        }
-        case 4: {
-            string line;
-            std::ifstream fin(failas);
-            std::getline(fin, line);
-            while (std::getline(fin, line)) {
-                m++;
-                temp.paz.clear();
-                std::istringstream iss(line);
-                iss>>temp.vardas>>temp.pavarde;
-                while (iss>>x) {
-                    temp.paz.push_back(x);
-                }
-                temp.egz=temp.paz.back();
-                temp.paz.pop_back();
-                A.push_back(temp);
-            }
-            fin.close();
-            break;
-        }
+        case 1: ivestiRanka(A, m); break;
+        case 2: generuotiPazymius(A, m); break;
+        case 3: generuotiViska(A, m); break;
+        case 4: skaitytiIsFailo(A, m, failas); break;
     }
     // --------- SKAICIAVIMAI ---------
 

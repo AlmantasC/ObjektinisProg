@@ -18,3 +18,7 @@ bool pagalGal(studentas a, studentas b);
 int getInt(int min, int max);
 std::string getFile();
 void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas);
+void ivestiRanka(std::vector<studentas>& A, int& m);
+void generuotiPazymius(std::vector<studentas>& A, int& m);
+void generuotiViska(std::vector<studentas>& A, int& m);
+void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas);
