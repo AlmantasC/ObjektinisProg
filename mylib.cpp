@@ -48,17 +48,22 @@ int getInt(int min, int max) {
     int value;
     while (true) {
         try {
-            if (!(std::cin >> value))  {
+            if (!(std::cin>>value)) {
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
                 throw std::runtime_error("Neteisinga ivestis");
             }
-            if (value < min || value > max)
-                throw std::runtime_error("Pasirinkimas turi buti tarp " + std::to_string(min) + " ir " + std::to_string(max));
+            char leftover;
+            if (std::cin.get(leftover)&&leftover!='\n') {
+                std::cin.ignore(10000, '\n');
+                throw std::runtime_error("Neteisinga ivestis");
+            }
+            if (value<min||value>max)
+                throw std::runtime_error("Pasirinkimas turi buti tarp "+std::to_string(min)+" ir "+std::to_string(max));
             return value;
         }
         catch (const std::runtime_error& e) {
-            std::cout << e.what() << ", pabandykite dar karta: ";
+            std::cout<<e.what()<<", pabandykite dar karta: ";
         }
     }
 };
