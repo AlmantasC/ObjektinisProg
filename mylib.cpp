@@ -101,15 +101,14 @@ void ivestiRanka(std::vector<studentas>& A, int& m) {
         m++;
         temp.paz.clear();
         std::cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
-        while (std::cin>>x && x!=-1) {
-            if (x>=0 && x<=10) {
-                temp.paz.push_back(x);
-                std::cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
-            }
-            else std::cout<<"Neteisinga ivestis, bandykite dar karta: ";
+        while (true) {
+            x=getInt(-1, 10);
+            if(x==-1) break;
+            temp.paz.push_back(x);
+            std::cout<<"Irasykite studento nd pazymi (arba -1 baigti): ";
         }
         std::cout<<"Irasykite studento egzamino pazymi: ";
-        std::cin>>temp.egz;
+        temp.egz=getInt(0, 10);
         A.push_back(temp);
         std::cout<<"Irasykite studento varda (arba -1 baigti): ";
     }
