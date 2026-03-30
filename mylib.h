@@ -22,3 +22,4 @@ void ivestiRanka(std::vector<studentas>& A, int& m);
 void generuotiPazymius(std::vector<studentas>& A, int& m);
 void generuotiViska(std::vector<studentas>& A, int& m);
 void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas);
+void generuotiFaila();

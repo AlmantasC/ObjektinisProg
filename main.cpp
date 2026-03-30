@@ -28,12 +28,13 @@ int main(){
 
     // --------- PASIRINKIMAI ---------
 
-    cout<<"[1] - Įvedimas ranka\n[2] - Generuoti tik pažymius\n[3] - Generuoti viską\n[4] - Skaitymas iš failo\n[5] - Baigti darbą\nJūsų pasirinkimas: ";
-    int ivedimas=getInt(1, 5);
+    cout<<"[1] - Įvedimas ranka\n[2] - Generuoti tik pažymius\n[3] - Generuoti viską\n[4] - Skaitymas iš failo\n[5] - Failu generavimas\n[6] - Baigti darbą\nJūsų pasirinkimas: ";
+    int ivedimas=getInt(1, 6);
 
     string failas;
     switch (ivedimas) {
-        case 5: return 0;
+        case 6: return 0;
+        case 5: generuotiFaila(); return 0;
         case 4: failas=getFile();
     }
 

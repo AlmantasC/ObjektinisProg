@@ -180,3 +180,21 @@ void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas) {
     }
     fin.close();
 }
+
+void generuotiFaila(){
+    int n;
+    std::cout<<"Kiek studentu norite generuoti?: ";
+    n=getInt(1,10000000);
+    std::ofstream fout("generuotas.txt");
+    fout<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavarde";
+    for (int i=0; i<15; i++) {
+        fout<<"ND"<<std::setw(15)<<i+1;
+    }
+    fout<<"Egz.";
+    for (int i=1; i<=n; i++) {
+        fout<<"\nVardas"<<std::setw(15)<<i<<"Pavarde"<<std::setw(15)<<i;
+        for (int i=0; i<16; i++) {
+            fout<<std::setw(15)<<rand()%10+1;
+        }
+    }
+}
