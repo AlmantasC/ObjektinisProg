@@ -6,6 +6,9 @@
 #include <fstream>
 #include <stdexcept>
 #include <iomanip>
+#include <chrono>
+
+namespace chr = std::chrono;
 std::string randomstr(){
     int l = rand()%10+1;
     std::string name="", table="abcdefghijklmnopqrstuvwxyz";
@@ -185,6 +188,9 @@ void generuotiFaila(){
     int n;
     std::cout<<"Kiek studentu norite generuoti?: ";
     n=getInt(1,10000000);
+
+    auto tStart = chr::high_resolution_clock::now();
+
     std::ofstream fout("generuotas.txt");
     fout<<std::left<<std::setw(20)<<"Vardas"<<std::setw(20)<<"Pavarde";
     for (int i=0; i<15; i++) {
@@ -197,6 +203,10 @@ void generuotiFaila(){
             fout<<std::setw(20)<<rand()%10+1;
         }
     }
+    fout.close();
+
+    auto tEnd = chr::high_resolution_clock::now();
+    std::cout<<"Failo kurimas ("<<n<<" studentu): "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
 }
 
 void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai, std::vector<studentas>& nerds) {

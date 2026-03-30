@@ -94,7 +94,7 @@ int main(){
             fout.close();
             std::ofstream foute("nerds.txt");
             printRez(foute, nerds, skaiciavimas);
-            fout.close();
+            foute.close();
         }
     }
 
