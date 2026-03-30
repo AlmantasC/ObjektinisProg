@@ -198,3 +198,12 @@ void generuotiFaila(){
         }
     }
 }
+
+void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai, std::vector<studentas>& nerds) {
+    for (const auto& i : studentai) {
+        if (i.gal < 5)
+            nevykeliai.push_back(i);
+        else
+            nerds.push_back(i);
+    }
+}

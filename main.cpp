@@ -44,8 +44,8 @@ int main(){
     cout<<"Pasirinkite galutinio skaičiavimo budą ([1] - vidurkis arba [2] - mediana): ";
     int skaiciavimas=getInt(1, 2);
 
-    cout<<"Pasirinkite išvedimo budą ([1] - į failą arba [2] - į ekraną): ";
-    int isvedimas=getInt(1, 2);
+    cout<<"Pasirinkite išvedimo budą ([1] - į failą, [2] - į ekraną arba [3] - skirstymas): ";
+    int isvedimas=getInt(1, 3);
 
     // --------- IVEDIMAS ---------
 
@@ -85,6 +85,10 @@ int main(){
         case 2: {
             printRez(cout, A, skaiciavimas);
             break;
+        }
+        case 3: {
+            vector<studentas> nevykeliai, nerds;
+            skirstymas(A, nevykeliai, nerds);
         }
     }
 
