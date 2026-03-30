@@ -57,6 +57,9 @@ int main(){
         case 3: generuotiViska(A, m); break;
         case 4: skaitytiIsFailo(A, m, failas); break;
     }
+    auto tNuskaitymas = chr::high_resolution_clock::now();
+    cout<<"\nNuskaitymas:       "<<chr::duration_cast<chr::milliseconds>(tNuskaitymas-tStart).count()<<" ms";
+
     // --------- SKAICIAVIMAI ---------
 
     switch (skaiciavimas){
@@ -88,18 +91,25 @@ int main(){
         }
         case 3: {
             vector<studentas> nevykeliai, nerds;
+            auto tSkirstymasStart = chr::high_resolution_clock::now();
             skirstymas(A, nevykeliai, nerds);
+            auto tSkirstymasEnd = chr::high_resolution_clock::now();
+            cout<<"\nSkirstymas:        "<<chr::duration_cast<chr::milliseconds>(tSkirstymasEnd-tSkirstymasStart).count()<<" ms";
+
+            auto tIsvedasStart = chr::high_resolution_clock::now();
             std::ofstream fout("nevykeliai.txt");
             printRez(fout, nevykeliai, skaiciavimas);
             fout.close();
             std::ofstream foute("nerds.txt");
             printRez(foute, nerds, skaiciavimas);
             foute.close();
+            auto tIsvedasEnd = chr::high_resolution_clock::now();
+            cout<<"\nIsvedimas i faila: "<<chr::duration_cast<chr::milliseconds>(tIsvedasEnd-tIsvedasStart).count()<<" ms";
+            }
         }
-    }
 
     auto tEnd = chr::high_resolution_clock::now();
-    cout<<"\nUžtruko: "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
+    cout<<"\nIš viso užtruko:   "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
 
     return 0;
 }
