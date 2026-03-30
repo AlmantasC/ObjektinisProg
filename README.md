@@ -1,12 +1,7 @@
 # ObjektinisProg
-Testavimas:
-
-Su kiekvienu failu isbandyta kiekvienas rusiavimo ir skaiciavimo budas
-
-Ismatuoti laikai sudeti i vidurki
-
-studentai10000.txt: 136.33 ms
-
-studentai100000.txt: 1766.66 ms
-
-studentai1000000.txt: 16491.16 ms
+Tyrimas 1:
+1000 - 15 ms
+10000 - 53 ms
+100000 - 587 ms
+1000000 - 5679 ms
+10000000 - 55275 ms
