@@ -24,7 +24,7 @@ int main(){
     std::srand(std::time(0));
     vector<studentas> A;
     studentas temp;
-    int m=0, n=0, x;
+    int m=0;
 
     // --------- PASIRINKIMAI ---------
 
@@ -89,6 +89,12 @@ int main(){
         case 3: {
             vector<studentas> nevykeliai, nerds;
             skirstymas(A, nevykeliai, nerds);
+            std::ofstream fout("nevykeliai.txt");
+            printRez(fout, nevykeliai, skaiciavimas);
+            fout.close();
+            std::ofstream foute("nerds.txt");
+            printRez(foute, nerds, skaiciavimas);
+            fout.close();
         }
     }
 
