@@ -88,11 +88,11 @@ std::string getFile() {
 };
 
 void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas) {
-    out<<std::fixed<<std::setprecision(2)<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavardė"<<"\tGalutinis ";
+    out<<std::fixed<<std::setprecision(2)<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<" Pavardė"<<"\tGalutinis ";
     out<<(skaiciavimas == 1 ? "(Vid.)" : "(Med.)");
     out<<"\n------------------------------------------------\n";
     for (const auto& s : A) {
-        out<<std::left<<std::setw(15)<<s.vardas<<std::setw(15)<<s.pavarde<<'\t'<<s.gal<<'\n';
+        out<<std::left<<std::setw(15)<<s.vardas<<'\t'<<std::setw(15)<<s.pavarde<<'\t'<<s.gal<<'\n';
     }
 };
 
@@ -186,15 +186,15 @@ void generuotiFaila(){
     std::cout<<"Kiek studentu norite generuoti?: ";
     n=getInt(1,10000000);
     std::ofstream fout("generuotas.txt");
-    fout<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavarde";
+    fout<<std::left<<std::setw(20)<<"Vardas"<<std::setw(20)<<"Pavarde";
     for (int i=0; i<15; i++) {
-        fout<<std::setw(15)<<("ND" + std::to_string(i + 1));
+        fout<<std::setw(20)<<("ND" + std::to_string(i + 1));
     }
     fout<<"Egz.";
     for (int i=1; i<=n; i++) {
-        fout<<'\n'<<std::setw(15)<<("Vardas"+std::to_string(i))<<std::setw(15)<<("Pavarde"+std::to_string(i));
+        fout<<'\n'<<std::setw(20)<<("Vardas"+std::to_string(i))<<std::setw(20)<<("Pavarde"+std::to_string(i));
         for (int i=0; i<16; i++) {
-            fout<<std::setw(15)<<rand()%10+1;
+            fout<<std::setw(20)<<rand()%10+1;
         }
     }
 }
