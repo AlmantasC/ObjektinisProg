@@ -188,11 +188,11 @@ void generuotiFaila(){
     std::ofstream fout("generuotas.txt");
     fout<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<"Pavarde";
     for (int i=0; i<15; i++) {
-        fout<<"ND"<<std::setw(15)<<i+1;
+        fout<<std::setw(15)<<("ND" + std::to_string(i + 1));
     }
     fout<<"Egz.";
     for (int i=1; i<=n; i++) {
-        fout<<"\nVardas"<<std::setw(15)<<i<<"Pavarde"<<std::setw(15)<<i;
+        fout<<'\n'<<std::setw(15)<<("Vardas"+std::to_string(i))<<std::setw(15)<<("Pavarde"+std::to_string(i));
         for (int i=0; i<16; i++) {
             fout<<std::setw(15)<<rand()%10+1;
         }
