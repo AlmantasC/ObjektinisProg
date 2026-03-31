@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <deque>
 #include <vector>
 #include <fstream>
 struct studentas {
@@ -17,10 +18,10 @@ bool pagalPavard(studentas a, studentas b);
 bool pagalGal(studentas a, studentas b);
 int getInt(int min, int max);
 std::string getFile();
-void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas);
-void ivestiRanka(std::vector<studentas>& A, int& m);
-void generuotiPazymius(std::vector<studentas>& A, int& m);
-void generuotiViska(std::vector<studentas>& A, int& m);
-void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas);
+void printRez(std::ostream& out, std::deque<studentas>& A, int skaiciavimas);
+void ivestiRanka(std::deque<studentas>& A, int& m);
+void generuotiPazymius(std::deque<studentas>& A, int& m);
+void generuotiViska(std::deque<studentas>& A, int& m);
+void skaitytiIsFailo(std::deque<studentas>& A, int& m, std::string& failas);
 void generuotiFaila();
-void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai, std::vector<studentas>& nerds);
+void skirstymas(std::deque<studentas>& studentai, std::deque<studentas>& nevykeliai, std::deque<studentas>& nerds);

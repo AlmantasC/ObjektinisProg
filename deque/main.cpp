@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
-#include <vector>
+#include <deque>
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
@@ -14,7 +14,7 @@ using std::cin;
 using std::string;
 using std::cout;
 using std::setw;
-using std::vector;
+using std::deque;
 using std::sort;
 namespace chr = std::chrono;
 
@@ -22,7 +22,7 @@ int main(){
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);
     std::srand(std::time(0));
-    vector<studentas> A;
+    deque<studentas> A;
     studentas temp;
     int m=0;
 
@@ -90,7 +90,7 @@ int main(){
             break;
         }
         case 3: {
-            vector<studentas> nevykeliai, nerds;
+            deque<studentas> nevykeliai, nerds;
             auto tSkirstymasStart = chr::high_resolution_clock::now();
             skirstymas(A, nevykeliai, nerds);
             auto tSkirstymasEnd = chr::high_resolution_clock::now();
