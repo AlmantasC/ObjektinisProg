@@ -1,1 +1,7 @@
 *.txt
+*.o
+*.cbp
+*.depend
+*.layout
+bin/
+obj/
