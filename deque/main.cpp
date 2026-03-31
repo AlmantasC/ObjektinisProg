@@ -57,8 +57,8 @@ int main(){
         case 3: generuotiViska(A, m); break;
         case 4: skaitytiIsFailo(A, m, failas); break;
     }
-    auto tNuskaitymas = chr::high_resolution_clock::now();
-    cout<<"\nNuskaitymas:       "<<chr::duration_cast<chr::milliseconds>(tNuskaitymas-tStart).count()<<" ms";
+    auto tNuskaitymasEnd = chr::high_resolution_clock::now();
+    cout << "\nNuskaitymas:   " << chr::duration_cast<chr::milliseconds>(tNuskaitymasEnd-tStart).count() << " ms";
 
     // --------- SKAICIAVIMAI ---------
 
@@ -69,13 +69,14 @@ int main(){
 
 
     // --------- RUSIAVIMAS ---------
-
+    auto tRusiavimasStart = chr::high_resolution_clock::now();
     switch (rusiavimas) {
         case 1: sort(A.begin(), A.end(), pagalVard); break;
         case 2: sort(A.begin(), A.end(), pagalPavard); break;
         case 3: sort(A.begin(), A.end(), pagalGal); break;
     }
-
+    auto tRusiavimasEnd = chr::high_resolution_clock::now();
+    cout << "\nRūšiavimas:    " << chr::duration_cast<chr::milliseconds>(tRusiavimasEnd-tRusiavimasStart).count() << " ms";
     // --------- ISVEDIMAS ---------
 
     switch (isvedimas) {
@@ -90,21 +91,18 @@ int main(){
             break;
         }
         case 3: {
-            deque<studentas> nevykeliai, nerds;
             auto tSkirstymasStart = chr::high_resolution_clock::now();
+            deque<studentas> nevykeliai, nerds;
             skirstymas(A, nevykeliai, nerds);
             auto tSkirstymasEnd = chr::high_resolution_clock::now();
-            cout<<"\nSkirstymas:        "<<chr::duration_cast<chr::milliseconds>(tSkirstymasEnd-tSkirstymasStart).count()<<" ms";
+            cout << "\nSkirstymas:    " << chr::duration_cast<chr::milliseconds>(tSkirstymasEnd-tSkirstymasStart).count() << " ms";
 
-            auto tIsvedasStart = chr::high_resolution_clock::now();
             std::ofstream fout("nevykeliai.txt");
             printRez(fout, nevykeliai, skaiciavimas);
             fout.close();
             std::ofstream foute("nerds.txt");
             printRez(foute, nerds, skaiciavimas);
             foute.close();
-            auto tIsvedasEnd = chr::high_resolution_clock::now();
-            cout<<"\nIsvedimas i faila: "<<chr::duration_cast<chr::milliseconds>(tIsvedasEnd-tIsvedasStart).count()<<" ms";
             }
         }
 
