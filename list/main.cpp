@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
-#include <vector>
+#include <list>
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
@@ -14,15 +14,14 @@ using std::cin;
 using std::string;
 using std::cout;
 using std::setw;
-using std::vector;
-using std::sort;
+using std::list;
 namespace chr = std::chrono;
 
 int main(){
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);
     std::srand(std::time(0));
-    vector<studentas> A;
+    list<studentas> A;
     studentas temp;
     int m=0;
 
@@ -63,17 +62,17 @@ int main(){
     // --------- SKAICIAVIMAI ---------
 
     switch (skaiciavimas){
-        case 1: for (int i=0; i<m; i++) A[i].gal=0.4*vid(A[i])+0.6*A[i].egz; break;
-        case 2: for (int i=0; i<m; i++) A[i].gal=0.4*med(A[i])+0.6*A[i].egz; break;
+        case 1: for (auto& s : A) s.gal = 0.4*vid(s) + 0.6*s.egz; break;
+        case 2: for (auto& s : A) s.gal = 0.4*med(s) + 0.6*s.egz; break;
     }
 
 
     // --------- RUSIAVIMAS ---------
 
     switch (rusiavimas) {
-        case 1: sort(A.begin(), A.end(), pagalVard); break;
-        case 2: sort(A.begin(), A.end(), pagalPavard); break;
-        case 3: sort(A.begin(), A.end(), pagalGal); break;
+        case 1: A.sort(pagalVard); break;
+        case 2: A.sort(pagalPavard); break;
+        case 3: A.sort(pagalGal); break;
     }
 
     // --------- ISVEDIMAS ---------
@@ -90,7 +89,7 @@ int main(){
             break;
         }
         case 3: {
-            vector<studentas> nevykeliai, nerds;
+            list<studentas> nevykeliai, nerds;
             auto tSkirstymasStart = chr::high_resolution_clock::now();
             skirstymas(A, nevykeliai, nerds);
             auto tSkirstymasEnd = chr::high_resolution_clock::now();

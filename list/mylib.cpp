@@ -1,6 +1,7 @@
 #include "mylib.h"
 #include <iostream>
 #include <string>
+#include <list>
 #include <vector>
 #include <algorithm>
 #include <fstream>
@@ -90,7 +91,7 @@ std::string getFile() {
     }
 };
 
-void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas) {
+void printRez(std::ostream& out, std::list<studentas>& A, int skaiciavimas) {
     out<<std::fixed<<std::setprecision(2)<<std::left<<std::setw(15)<<"Vardas"<<std::setw(15)<<" Pavardė"<<"\tGalutinis ";
     out<<(skaiciavimas == 1 ? "(Vid.)" : "(Med.)");
     out<<"\n------------------------------------------------\n";
@@ -99,7 +100,7 @@ void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas) {
     }
 };
 
-void ivestiRanka(std::vector<studentas>& A, int& m) {
+void ivestiRanka(std::list<studentas>& A, int& m) {
     studentas temp;
     int x;
     std::cout<<"Įrašykite studento vardą (arba -1 baigti): ";
@@ -122,7 +123,7 @@ void ivestiRanka(std::vector<studentas>& A, int& m) {
     }
 }
 
-void generuotiPazymius(std::vector<studentas>& A, int& m) {
+void generuotiPazymius(std::list<studentas>& A, int& m) {
     studentas temp;
     int n, x;
     std::cout<<"Po kiek nd pažymių generuoti: ";
@@ -143,7 +144,7 @@ void generuotiPazymius(std::vector<studentas>& A, int& m) {
     }
 }
 
-void generuotiViska(std::vector<studentas>& A, int& m) {
+void generuotiViska(std::list<studentas>& A, int& m) {
     studentas temp;
     int n, x;
     std::cout<<"Kiek studentų sugeneruoti: ";
@@ -163,7 +164,7 @@ void generuotiViska(std::vector<studentas>& A, int& m) {
     }
 }
 
-void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas) {
+void skaitytiIsFailo(std::list<studentas>& A, int& m, std::string& failas) {
     studentas temp;
     int x;
     std::string line;
@@ -209,7 +210,7 @@ void generuotiFaila(){
     std::cout<<"Failo kurimas ("<<n<<" studentu): "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
 }
 
-void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai, std::vector<studentas>& nerds) {
+void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai, std::list<studentas>& nerds) {
     for (const auto& i : studentai) {
         if (i.gal < 5)
             nevykeliai.push_back(i);

@@ -63,8 +63,8 @@ int main(){
     // --------- SKAICIAVIMAI ---------
 
     switch (skaiciavimas){
-        case 1: for (int i=0; i<m; i++) A[i].gal=0.4*vid(A[i])+0.6*A[i].egz; break;
-        case 2: for (int i=0; i<m; i++) A[i].gal=0.4*med(A[i])+0.6*A[i].egz; break;
+        case 1: for (auto& s : A) s.gal = 0.4*vid(s) + 0.6*s.egz; break;
+        case 2: for (auto& s : A) s.gal = 0.4*med(s) + 0.6*s.egz; break;
     }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <list>
 #include <fstream>
 struct studentas {
     std::string vardas, pavarde;
@@ -17,10 +18,10 @@ bool pagalPavard(studentas a, studentas b);
 bool pagalGal(studentas a, studentas b);
 int getInt(int min, int max);
 std::string getFile();
-void printRez(std::ostream& out, std::vector<studentas>& A, int skaiciavimas);
-void ivestiRanka(std::vector<studentas>& A, int& m);
-void generuotiPazymius(std::vector<studentas>& A, int& m);
-void generuotiViska(std::vector<studentas>& A, int& m);
-void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas);
+void printRez(std::ostream& out, std::list<studentas>& A, int skaiciavimas);
+void ivestiRanka(std::list<studentas>& A, int& m);
+void generuotiPazymius(std::list<studentas>& A, int& m);
+void generuotiViska(std::list<studentas>& A, int& m);
+void skaitytiIsFailo(std::list<studentas>& A, int& m, std::string& failas);
 void generuotiFaila();
-void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai, std::vector<studentas>& nerds);
+void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai, std::list<studentas>& nerds);
