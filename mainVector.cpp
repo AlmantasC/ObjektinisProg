@@ -166,6 +166,7 @@ int main(){
             temp.egz=temp.paz.back();
             temp.paz.pop_back();
             n--;
+            temp.rez-=temp.egz;
             temp.rez/=n;
 
             A.push_back(temp);
