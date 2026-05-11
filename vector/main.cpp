@@ -25,7 +25,8 @@ int main(){
     vector<studentas> A;
     studentas temp;
     int m=0;
-
+    auto ms = [](auto d){
+    return chr::duration<double, std::milli>(d).count();};
     // --------- PASIRINKIMAI ---------
 
     cout<<"[1] - Įvedimas ranka\n[2] - Generuoti tik pažymius\n[3] - Generuoti viską\n[4] - Skaitymas iš failo\n[5] - Failu generavimas\n[6] - Baigti darbą\nJūsų pasirinkimas: ";
@@ -57,8 +58,8 @@ int main(){
         case 3: generuotiViska(A, m); break;
         case 4: skaitytiIsFailo(A, m, failas); break;
     }
-    auto tNuskaitymas = chr::high_resolution_clock::now();
-    cout<<"\nNuskaitymas:       "<<chr::duration_cast<chr::milliseconds>(tNuskaitymas-tStart).count()<<" ms";
+    auto tNuskaitymasEnd = chr::high_resolution_clock::now();
+    cout<<"\nNuskaitymas:       "<< ms(tNuskaitymasEnd-tStart)    <<" ms";
 
     // --------- SKAICIAVIMAI ---------
 
@@ -76,7 +77,7 @@ int main(){
         case 3: sort(A.begin(), A.end(), pagalGal); break;
     }
     auto tRusiavimasEnd = chr::high_resolution_clock::now();
-    cout << "\nRūšiavimas:    " << chr::duration_cast<chr::milliseconds>(tRusiavimasEnd-tRusiavimasStart).count() << " ms";
+    cout<<"\nRūšiavimas:        "<< ms(tRusiavimasEnd-tRusiavimasStart) <<" ms";
     // --------- ISVEDIMAS ---------
 
     switch (isvedimas) {
@@ -95,7 +96,7 @@ int main(){
             auto tSkirstymasStart = chr::high_resolution_clock::now();
             skirstymas(A, nevykeliai, nerds);
             auto tSkirstymasEnd = chr::high_resolution_clock::now();
-            cout<<"\nSkirstymas:        "<<chr::duration_cast<chr::milliseconds>(tSkirstymasEnd-tSkirstymasStart).count()<<" ms";
+            cout<<"\nSkirstymas:        "<< ms(tSkirstymasEnd-tSkirstymasStart) <<" ms";
 
             std::ofstream fout("nevykeliai.txt");
             printRez(fout, nevykeliai, skaiciavimas);
@@ -107,7 +108,7 @@ int main(){
         }
 
     auto tEnd = chr::high_resolution_clock::now();
-    cout<<"\nIš viso užtruko:   "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
+    cout<<"\nIš viso užtruko:   "<< ms(tEnd-tStart) <<" ms\n";
 
     return 0;
 }
