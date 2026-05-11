@@ -8,32 +8,24 @@ Tyrimui naudojami prieš tai sugeneruoti failai. Bandyti visi rūšiavimo ir gal
 
 ---
 
-### Nuskaitymas (ms)
+### 1 strategija
 
-| Studentų sk. | vector | list  | deque |
-|-------------:|-------:|------:|------:|
-| 1 000        | 4      | 8     | 3     |
-| 10 000       | 50     | 45    | 45    |
-| 100 000      | 437    | 441   | 454   |
-| 1 000 000    | 4358   | 4408  | 4548  |
-| 10 000 000   | 43856  | 44377 | 45548 |
+Bendro studentai konteinerio skaidymas į du naujus to paties tipo konteinerius: „nevykeliai" ir „nerds". Tokiu būdu tas pats studentas yra dvejuose konteineriuose: bendrame studentai ir viename iš suskaidytų.
 
-### Rūšiavimas (ms)
-
-| Studentų sk. | vector | list  | deque |
-|-------------:|-------:|------:|------:|
-| 1 000        | 4      | 0     | 4     |
-| 10 000       | 32     | 12    | 33    |
-| 100 000      | 438    | 139   | 462   |
-| 1 000 000    | 5630   | 1681  | 6363  |
-| 10 000 000   | 72303  | 20698 | 80866 |
-
-### Skirstymas (ms)
-
-| Studentų sk. | vector | list | deque |
-|-------------:|-------:|-----:|------:|
-| 1 000        | 0      | 0    | 0     |
-| 10 000       | 4      | 0    | 0     |
-| 100 000      | 15     | 20   | 13    |
-| 1 000 000    | 145    | 204  | 166   |
-| 10 000 000   | 1373   | 2225 | 1657  |
+| Studentų kiekis | Konteineris | Nuskaitymas (ms) | Rūšiavimas (ms) | Skirstymas (ms) |
+|----------------:|-------------|----------------:|----------------:|----------------:|
+| 1 000           | vector      | 2.53            | 0.18            | 0.09            |
+|                 | deque       | 1.74            | 0.21            | 0.08            |
+|                 | list        | 2.07            | 0.09            | 0.11            |
+| 10 000          | vector      | 45.12           | 26.47           | 0.43            |
+|                 | deque       | 41.61           | 29.34           | 0.29            |
+|                 | list        | 49.38           | 13.02           | 0.37            |
+| 100 000         | vector      | 439.84          | 363.55          | 16.28           |
+|                 | deque       | 441.07          | 404.92          | 15.83           |
+|                 | list        | 451.29          | 171.84          | 24.51           |
+| 1 000 000       | vector      | 4397.41         | 4868.73         | 192.74          |
+|                 | deque       | 4418.56         | 5341.08         | 169.17          |
+|                 | list        | 4454.83         | 2207.16         | 220.39          |
+| 10 000 000      | vector      | 44284.6         | 62254.37        | 1880.62         |
+|                 | deque       | 44514.8         | 69897.44        | 1865.93         |
+|                 | list        | 44742.3         | 28843.91        | 2444.18         |
