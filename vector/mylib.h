@@ -23,4 +23,4 @@ void generuotiPazymius(std::vector<studentas>& A, int& m);
 void generuotiViska(std::vector<studentas>& A, int& m);
 void skaitytiIsFailo(std::vector<studentas>& A, int& m, std::string& failas);
 void generuotiFaila();
-void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai, std::vector<studentas>& nerds);
+void skirstymas(std::vector<studentas>& studentai, std::vector<studentas>& nevykeliai);

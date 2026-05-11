@@ -93,8 +93,8 @@ int main(){
         }
         case 3: {
             auto tSkirstymasStart = chr::high_resolution_clock::now();
-            deque<studentas> nevykeliai, nerds;
-            skirstymas(A, nevykeliai, nerds);
+            deque<studentas> nevykeliai;
+            skirstymas(A, nevykeliai);
             auto tSkirstymasEnd = chr::high_resolution_clock::now();
             cout<<"\nSkirstymas:        "<< ms(tSkirstymasEnd-tSkirstymasStart) <<" ms";
 
@@ -102,7 +102,7 @@ int main(){
             printRez(fout, nevykeliai, skaiciavimas);
             fout.close();
             std::ofstream foute("nerds.txt");
-            printRez(foute, nerds, skaiciavimas);
+            printRez(foute, A, skaiciavimas);
             foute.close();
             }
         }

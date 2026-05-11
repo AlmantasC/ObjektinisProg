@@ -24,4 +24,4 @@ void generuotiPazymius(std::list<studentas>& A, int& m);
 void generuotiViska(std::list<studentas>& A, int& m);
 void skaitytiIsFailo(std::list<studentas>& A, int& m, std::string& failas);
 void generuotiFaila();
-void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai, std::list<studentas>& nerds);
+void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai);

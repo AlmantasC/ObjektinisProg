@@ -90,9 +90,9 @@ int main(){
             break;
         }
         case 3: {
-            list<studentas> nevykeliai, nerds;
+            list<studentas> nevykeliai;
             auto tSkirstymasStart = chr::high_resolution_clock::now();
-            skirstymas(A, nevykeliai, nerds);
+            skirstymas(A, nevykeliai);
             auto tSkirstymasEnd = chr::high_resolution_clock::now();
             cout<<"\nSkirstymas:        "<< ms(tSkirstymasEnd-tSkirstymasStart) <<" ms";
 
@@ -100,7 +100,7 @@ int main(){
             printRez(fout, nevykeliai, skaiciavimas);
             fout.close();
             std::ofstream foute("nerds.txt");
-            printRez(foute, nerds, skaiciavimas);
+            printRez(foute, A, skaiciavimas);
             foute.close();
             }
         }

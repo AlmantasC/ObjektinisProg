@@ -209,11 +209,8 @@ void generuotiFaila(){
     std::cout<<"Failo kurimas ("<<n<<" studentu): "<<chr::duration_cast<chr::milliseconds>(tEnd-tStart).count()<<" ms\n";
 }
 
-void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai, std::list<studentas>& nerds) {
-    for (const auto& i : studentai) {
-        if (i.gal < 5)
-            nevykeliai.push_back(i);
-        else
-            nerds.push_back(i);
-    }
+void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai) {
+    auto it = std::stable_partition(studentai.begin(), studentai.end(), [](const studentas& s){ return s.gal >= 5; });
+    nevykeliai.assign(it, studentai.end());
+    studentai.erase(it, studentai.end());
 }

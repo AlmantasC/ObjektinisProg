@@ -24,4 +24,4 @@ void generuotiPazymius(std::deque<studentas>& A, int& m);
 void generuotiViska(std::deque<studentas>& A, int& m);
 void skaitytiIsFailo(std::deque<studentas>& A, int& m, std::string& failas);
 void generuotiFaila();
-void skirstymas(std::deque<studentas>& studentai, std::deque<studentas>& nevykeliai, std::deque<studentas>& nerds);
+void skirstymas(std::deque<studentas>& studentai, std::deque<studentas>& nevykeliai);
