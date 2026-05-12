@@ -210,7 +210,8 @@ void generuotiFaila(){
 }
 
 void skirstymas(std::list<studentas>& studentai, std::list<studentas>& nevykeliai) {
-    auto it = std::stable_partition(studentai.begin(), studentai.end(), [](const studentas& s){ return s.gal >= 5; });
-    nevykeliai.assign(it, studentai.end());
-    studentai.erase(it, studentai.end());
+    std::copy_if(studentai.begin(), studentai.end(), std::back_inserter(nevykeliai),
+        [](const studentas& s){ return s.gal < 5; });
+    studentai.erase(std::remove_if(studentai.begin(), studentai.end(),
+        [](const studentas& s){ return s.gal < 5; }), studentai.end());
 }
