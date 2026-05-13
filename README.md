@@ -1,5 +1,48 @@
 # ObjektinisProg
 
+## Naudojimosi instrukcija
+
+Funkcijos:
+- Pasirinktinas išvestis į failą arba į terminalą.
+- Pasirinktinas galutinio rezultato skaičiavimas, remiantis vidurkiu arba mediana.
+- Rūšiavimas pasirinktinu būdu.
+- Studentų skirstymas į „nevykelius" (galutinis < 5) ir „nerdus" (galutinis ≥ 5).
+
+```
+1 parinktis - rankinis duomenų įvedimas: studento vardo, pavardės, namų darbų rezultatų, egzamino rezultato.
+2 parinktis - pusiau rankinis įvedimas: studento vardo, pavardės įvedimas, rezultatų generavimas.
+3 parinktis - automatinis studentų vardų, pavardžių, rezultatų generavimas, jų apdorojimas ir išvedimas.
+4 parinktis - skaitymas iš pasirinkto failo, rūšiavimas pasirinktinu būdu, duomenų apdorojimas ir išvedimas.
+5 parinktis - studentų failų generavimas: studentų, namų darbų kiekio pasirinkimas ir išvedimas į studentų failą.
+6 parinktis - programos nutraukimas.
+```
+
+Pasirinkus 1–4 parinktį, programa toliau klausia:
+
+```
+Rūšiavimo kriterijus  - pagal vardą, pavardę arba galutinį balą.
+Skaičiavimo būdas     - galutinis balas skaičiuojamas vidurkiu arba mediana.
+Išvedimo būdas        - į failą, į ekraną arba skirstymas į „nevykelių" ir „nerdų" failus.
+```
+
+---
+
+## Kompiliavimas
+
+Reikalavimai: CMake ≥ 3.10, MinGW (Windows) arba GCC (Linux).
+
+```bash
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles"   # Windows
+# cmake ..                      # Linux
+cmake --build . --target vector
+```
+
+Vietoje `vector` galima nurodyti `list` arba `deque`.
+
+---
+
 ## Spartos tyrimas
 
 Tyrimui naudojami prieš tai sugeneruoti failai. Bandyti visi rūšiavimo ir galutinio skaičiavimo būdai, rezultatai išreikšti vidurkiu.
@@ -83,3 +126,15 @@ Tas pats kaip 2 strategija, tačiau skirstymui naudojamas `std::partition` — e
 ## Išvados
 
 Nuskaitymo ir rūšiavimo rezultatai išlieka panašūs visose trijose strategijose, kaip ir tikėtasi — skiriasi tik skirstymo dalis. Aiškiausiai tai matyti lyginant 2 ir 3 strategiją: `partition` (3 strat.) skirstymas yra žymiai greitesnis už `copy_if` + `remove_if` (2 strat.), nes atlieka tik vieną perėjimą per konteinerį vietoj dviejų. Skirtumas ypač ryškus didesniuose failuose — pvz., 10M studentų su vector: 2 strategija ~1559 ms, 3 strategija ~235 ms.
+
+---
+
+## Versijų istorija
+
+| Versija | Pakeitimai |
+|--------:|------------|
+| v0.1 | Pradinis variantas. Duomenų įvedimas ranka, C masyvo ir `std::vector` realizacijos, galutinio balo skaičiavimas vidurkiu arba mediana, išvedimas į ekraną. |
+| v0.2 | Pridėtas duomenų nuskaitymas iš failo, išvedimas į failą, rūšiavimas pagal vardą, pavardę arba galutinį balą. Projektas išskaidytas į kelis failus. |
+| v0.3 | Funkcijos perkeltos į antraštinį (`.h`) ir realizacijos (`.cpp`) failus. Pridėtas klaidų gaudymas (`exception handling`). |
+| v0.4 | Pridėtas failų generavimas, studentų skirstymas į „nevykelius" ir „nerdus", programos spartos tyrimas su 5 skirtingo dydžio failais. |
+| v1.0 | Trys atskiros realizacijos (`vector`, `list`, `deque`). Išbandytos 3 skirstymo strategijos. Pridėtas `CMakeLists.txt`. |
