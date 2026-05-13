@@ -66,13 +66,21 @@ int main(){
         case 2: for (auto& s : A) s.gal = 0.4*med(s) + 0.6*s.egz; break;
     }
 
+    // --------- SKIRSTYMAS ---------
+    list<studentas> nevykeliai;
+    if (isvedimas==3) {
+        auto tSkirstymasStart = chr::high_resolution_clock::now();
+        skirstymas(A, nevykeliai);
+        auto tSkirstymasEnd = chr::high_resolution_clock::now();
+        cout<<"\nSkirstymas:        "<< ms(tSkirstymasEnd-tSkirstymasStart) <<" ms";
+        }
 
     // --------- RUSIAVIMAS ---------
     auto tRusiavimasStart = chr::high_resolution_clock::now();
     switch (rusiavimas) {
-        case 1: A.sort(pagalVard); break;
-        case 2: A.sort(pagalPavard); break;
-        case 3: A.sort(pagalGal); break;
+        case 1: A.sort(pagalVard); if (isvedimas==3) nevykeliai.sort(pagalVard); break;
+        case 2: A.sort(pagalPavard); if (isvedimas==3) nevykeliai.sort(pagalPavard); break;
+        case 3: A.sort(pagalGal); if (isvedimas==3) nevykeliai.sort(pagalGal); break;
     }
     auto tRusiavimasEnd = chr::high_resolution_clock::now();
     cout<<"\nRūšiavimas:        "<< ms(tRusiavimasEnd-tRusiavimasStart) <<" ms";
@@ -90,12 +98,6 @@ int main(){
             break;
         }
         case 3: {
-            list<studentas> nevykeliai;
-            auto tSkirstymasStart = chr::high_resolution_clock::now();
-            skirstymas(A, nevykeliai);
-            auto tSkirstymasEnd = chr::high_resolution_clock::now();
-            cout<<"\nSkirstymas:        "<< ms(tSkirstymasEnd-tSkirstymasStart) <<" ms";
-
             std::ofstream fout("nevykeliai.txt");
             printRez(fout, nevykeliai, skaiciavimas);
             fout.close();
