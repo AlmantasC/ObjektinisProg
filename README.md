@@ -53,3 +53,33 @@ Bendro studentų konteinerio skaidymas panaudojant tik vieną naują konteinerį
 | 10 000 000      | vector      | 45101.00        | 64604.73        | 1559.45         |
 |                 | deque       | 42853.97        | 66047.37        | 1807.13         |
 |                 | list        | 45069.80        | 30505.13        | 2956.44         |
+
+---
+
+### 3 strategija
+
+Tas pats kaip 2 strategija, tačiau skirstymui naudojamas `std::partition` — elementai perstumiami vietoje (in-place) vienu perėjimu, po to nevykeliai nukopijuojami į naują konteinerį ir ištrinami iš bendro. Skirtingai nuo 2 strategijos, kuri naudoja `copy_if` ir `remove_if` (du perėjimai), `partition` tai atlieka vienu perėjimu.
+
+| Studentų kiekis | Konteineris | Nuskaitymas (ms) | Rūšiavimas (ms) | Skirstymas (ms) |
+|----------------:|-------------|----------------:|----------------:|----------------:|
+| 1 000           | vector      | 2.57            | 0.53            | 0.00            |
+|                 | deque       | 8.10            | 0.00            | 0.00            |
+|                 | list        | 9.97            | 0.00            | 0.00            |
+| 10 000          | vector      | 41.54           | 21.68           | 0.00            |
+|                 | deque       | 43.23           | 20.37           | 0.00            |
+|                 | list        | 45.32           | 16.32           | 0.00            |
+| 100 000         | vector      | 444.37          | 280.55          | 3.97            |
+|                 | deque       | 428.07          | 305.00          | 3.35            |
+|                 | list        | 424.28          | 186.82          | 8.17            |
+| 1 000 000       | vector      | 4453.88         | 3671.65         | 26.63           |
+|                 | deque       | 4267.51         | 4031.19         | 65.79           |
+|                 | list        | 4239.82         | 2598.73         | 100.15          |
+| 10 000 000      | vector      | 44772.97        | 40601.10        | 234.93          |
+|                 | deque       | 42661.50        | 48562.40        | 695.92          |
+|                 | list        | 42550.20        | 33182.10        | 1073.19         |
+
+---
+
+## Išvados
+
+Nuskaitymo ir rūšiavimo rezultatai išlieka panašūs visose trijose strategijose, kaip ir tikėtasi — skiriasi tik skirstymo dalis. Aiškiausiai tai matyti lyginant 2 ir 3 strategiją: `partition` (3 strat.) skirstymas yra žymiai greitesnis už `copy_if` + `remove_if` (2 strat.), nes atlieka tik vieną perėjimą per konteinerį vietoj dviejų. Skirtumas ypač ryškus didesniuose failuose — pvz., 10M studentų su vector: 2 strategija ~1559 ms, 3 strategija ~235 ms.
